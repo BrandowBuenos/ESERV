@@ -3,18 +3,17 @@ package interfaces;
 import peoples.ClientesController;
 import peoples.Pessoa;
 
-
 public class GerenciarClientes {
 
 	Pessoa pessoa;
-	
+
 	static ClientesController gerenciamentoDeClientes;
 
-	public GerenciarClientes(){
-        gerenciamentoDeClientes = new ClientesController();
-    }
+	public GerenciarClientes() {
+		gerenciamentoDeClientes = new ClientesController();
+	}
 
-	protected static void AdicionarCliente(Pessoa p)  {
+	protected static void AdicionarCliente(Pessoa p) {
 		gerenciamentoDeClientes.add(p);
 
 	}
@@ -32,7 +31,12 @@ public class GerenciarClientes {
 
 	}
 
-	protected static void RemoverCliente(long cpf){
+	protected static boolean existe(long cpf) {
+		return gerenciamentoDeClientes.existe(cpf);
+
+	}
+
+	protected static void RemoverCliente(long cpf) {
 		gerenciamentoDeClientes.remove(cpf);
 	}
 

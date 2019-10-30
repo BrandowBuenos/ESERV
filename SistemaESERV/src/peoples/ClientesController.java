@@ -3,7 +3,10 @@ package peoples;
 import java.util.ArrayList;
 
 /**
- * ClientesController
+ * Classe ClientesController que gerencia a lista de Clientes
+ * 
+ * @author Brandow Buenos
+ * @author Willian Clemente
  */
 public class ClientesController {
 
@@ -102,12 +105,23 @@ public class ClientesController {
 
 	}
 
+	/**
+	 * Verifica se cliente já existe
+	 * 
+	 * @param CPF
+	 * @return
+	 */
 	public boolean existe(long CPF) {
 		Pessoa pessoa = get(CPF);
 		return pessoa != null;
 
 	}
 
+	/**
+	 * Retorna a Lista De Clientes
+	 * 
+	 * @return
+	 */
 	public static ArrayList<Pessoa> getListaDeClientes() {
 		return listaDeClientes;
 	}

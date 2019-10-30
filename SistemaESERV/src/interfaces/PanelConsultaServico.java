@@ -3,6 +3,9 @@ package interfaces;
 import java.awt.*;
 import javax.swing.*;
 
+import services.ServicosController;
+import stocks.ProdutosController;
+
 import java.awt.event.*;
 
 /**
@@ -12,8 +15,7 @@ public class PanelConsultaServico extends JPanel implements ActionListener {
 
 	private JLabel lEstoque;
 
-	private JButton bEnviar;
-	private JButton bLimpar;
+	private JComboBox<String> jCServicos;
 
 	private JButton bVoltar;
 
@@ -36,21 +38,36 @@ public class PanelConsultaServico extends JPanel implements ActionListener {
 		bVoltar.addActionListener(this);
 		add(bVoltar);
 
-		String[] colunas = { "Nome" };
+		String[] colunas = { "Serviços cadastrados" };
 
-		
-		String s = GerenciarServicos.consultarServico();
-		
-		Object[][] dados = { { s }};
+		if (GerenciarServicos.consultarServico() == "") {
+			Object[][] dados = { { "Nenhum serviço cadastrado ainda!" } };
+			JTable tabela = new JTable(dados, colunas);
+			add(tabela);
+			JScrollPane barraRolagem = new JScrollPane(tabela);
+			add(barraRolagem);
 
-		JTable tabela = new JTable(dados, colunas);
-		add(tabela);
-		
-		JScrollPane barraRolagem = new JScrollPane(tabela);
-		add(barraRolagem);
-		
-		barraRolagem.setBounds(40, 200, 650, 200);
+			barraRolagem.setBounds(40, 200, 650, 200);
+		} else {
+			String s = GerenciarServicos.consultarServico();
+			Object[][] dados = { { s } };
+			JTable tabela = new JTable(dados, colunas);
+			add(tabela);
+			JScrollPane barraRolagem = new JScrollPane(tabela);
+			add(barraRolagem);
 
+			barraRolagem.setBounds(40, 200, 650, 200);
+		}
+
+		jCServicos = new javax.swing.JComboBox<String>();
+		jCServicos.setModel(
+				new javax.swing.DefaultComboBoxModel<String>(new String[] { "Serviços cadastrado" }));
+		jCServicos.setBounds(40, 350, 650, 300);
+		for (int i = 0; i < ServicosController.getListaDeServicos().size(); i++) {
+			jCServicos.addItem(ServicosController.getListaDeServicos().get(i).toString());
+		}
+		add(jCServicos);
+		
 	}
 
 	public void actionPerformed(ActionEvent ae) {

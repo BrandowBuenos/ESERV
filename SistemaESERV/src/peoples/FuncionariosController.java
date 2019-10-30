@@ -3,7 +3,10 @@ package peoples;
 import java.util.ArrayList;
 
 /**
- * FuncionariosController
+ * Classe FuncionariosController que gerencia a Lista De Funcionários.
+ * 
+ * @author Brandow Buenos
+ * @author Willian Clemente
  */
 public class FuncionariosController {
 
@@ -17,18 +20,18 @@ public class FuncionariosController {
 	}
 
 	/**
-	 * Adiciona a locacao na lista de Funcionarios
+	 * Adiciona um funcionário na lista de Funcionarios
 	 * 
-	 * @param l
+	 * @param Pessoa
 	 */
 	public void add(Pessoa p) {
 		listaDeFuncionarios.add(p);
 	}
 
 	/**
-	 * Retorna uma locação
+	 * Consulta um funcionário por CPF já estiver sido cadastrado
 	 * 
-	 * @param codigo
+	 * @param CPF
 	 * @return
 	 */
 	public Pessoa get(long CPF) {
@@ -40,6 +43,12 @@ public class FuncionariosController {
 		return null;
 	}
 
+	/**
+	 * Consulta um funcionário por nome e retorna um funcionário
+	 * 
+	 * @param nome
+	 * @return
+	 */
 	public static Pessoa get(String nome) {
 		for (int i = 0; i < listaDeFuncionarios.size(); i++) {
 			if (listaDeFuncionarios.get(i).getNome().equals(nome)) {
@@ -50,9 +59,9 @@ public class FuncionariosController {
 	}
 
 	/**
-	 * Lista todas as Funcionarios com o codigo inserido
+	 * Lista informações sobre o Funcionario por CPF
 	 * 
-	 * @param codigo
+	 * @param CPF
 	 * @return
 	 */
 	public String getInfo(long CPF) {
@@ -66,9 +75,9 @@ public class FuncionariosController {
 	}
 
 	/**
-	 * Lista todos as Funcionarios
+	 * Lista informações sobre todos os Funcionarios
 	 * 
-	 * @return
+	 * @return info
 	 */
 
 	public String getInfo() {
@@ -81,10 +90,10 @@ public class FuncionariosController {
 	}
 
 	/**
-	 * Edita dados de funcionário
+	 * Edita dados de funcionário já cadastrado
 	 * 
-	 * @param codigo
-	 * @param locacaoEditada
+	 * @param CPF
+	 * @param FuncionarioEditado
 	 * @return
 	 */
 	public boolean set(long CPF, Pessoa funcionarioEditado) {
@@ -98,9 +107,9 @@ public class FuncionariosController {
 	}
 
 	/**
-	 * Remove o funcionário conforme seu cpf
+	 * Remove o funcionário por CPF
 	 * 
-	 * @param codigo
+	 * @param CPF
 	 * @return
 	 */
 	public boolean remove(long CPF) {
@@ -113,9 +122,9 @@ public class FuncionariosController {
 	}
 
 	/**
-	 * Verifica se o funcinário existe conforme seu cpf
+	 * Verifica se o funcionário existe por CPF
 	 * 
-	 * @param codigo
+	 * @param CPF
 	 * @return
 	 */
 	public boolean existe(long CPF) {
@@ -124,8 +133,12 @@ public class FuncionariosController {
 
 	}
 
-	
-	 public static ArrayList<Pessoa> getListaFuncionarios() {
-	        return listaDeFuncionarios;
-	    }
+	/**
+	 * Retorna o Lista de funcionários
+	 * 
+	 * @return
+	 */
+	public static ArrayList<Pessoa> getListaFuncionarios() {
+		return listaDeFuncionarios;
+	}
 }

@@ -95,14 +95,27 @@ public class PanelCadastroServico extends JPanel implements ActionListener {
 
 		tPreco = new JTextField("");
 		tPreco.setBounds(20, 350, 140, 40);
+		tPreco.setDocument(new Tratamento());
 		add(tPreco);
+		
+		lPreco = new JLabel("Funcionário apto");
+		lPreco.setBounds(300, 310, 350, 40);
+		lPreco.setFont(new Font("Arial", Font.PLAIN, 20));
+		lPreco.setForeground(new Color(128, 128, 128));
+		add(lPreco);
 
 		jCFuncionarios = new javax.swing.JComboBox<String>();
-		jCFuncionarios.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Funcionários" }));
-		jCFuncionarios.setBounds(20, 380, 350, 40);
-		for (int i = 0; i < FuncionariosController.getListaFuncionarios().size(); i++) {
-			jCFuncionarios.addItem(FuncionariosController.getListaFuncionarios().get(i).getNome());
+		jCFuncionarios.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Selecione" }));
+		jCFuncionarios.setBounds(300, 350, 350, 40);
+
+		if (FuncionariosController.getListaFuncionarios().size() > 0) {
+			for (int i = 0; i < FuncionariosController.getListaFuncionarios().size(); i++) {
+				jCFuncionarios.addItem(FuncionariosController.getListaFuncionarios().get(i).getNome());
+			}
+		} else {
+			jCFuncionarios.addItem("Nenhum funcionário cadastrado");
 		}
+
 		add(jCFuncionarios);
 
 		bCadastrar = new JButton("Enviar");
@@ -125,34 +138,50 @@ public class PanelCadastroServico extends JPanel implements ActionListener {
 
 		if (ae.getSource() == bCadastrar) {
 
-			String nome = tNome.getText();
+			
+			try {
+				String nome = tNome.getText();
 
-			String precoStg = tPreco.getText();
-			float preco = Float.parseFloat(precoStg);
+				String precoStg = tPreco.getText();
+				float preco = Float.parseFloat(precoStg);
 
-			String nomeDoFuncionario = (String) jCFuncionarios.getSelectedItem();
+				String nomeDoFuncionario = (String) jCFuncionarios.getSelectedItem();
 
-			Funcionario f = (Funcionario) GerenciarFuncionarios.consultarFuncionario(nomeDoFuncionario);
+				Funcionario f = (Funcionario) GerenciarFuncionarios.consultarFuncionario(nomeDoFuncionario);
 
-			Servico novoServico = new Servico(nome, preco);
+				Servico novoServico = new Servico(nome, preco);
 
-			funcionariosAptos.add(f);
+				funcionariosAptos.add(f);
 
-			String descricao = tDescricao.getText();
-			novoServico.setDescricao(descricao);
+				String descricao = tDescricao.getText();
+				novoServico.setDescricao(descricao);
 
-			GerenciarServicos.adicionarServico(novoServico, funcionariosAptos);
+				GerenciarServicos.adicionarServico(novoServico, funcionariosAptos);
 
-			removeAll();
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame, "O serviço " + nome + " foi cadastrado com sucesso! ", ":)",
+						JOptionPane.INFORMATION_MESSAGE);
 
-			PanelGerenciamento pGerenciamento = new PanelGerenciamento();
-			setVisible(false);
-			Inicio.panelInicio(pGerenciamento);
-			pGerenciamento.setVisible(true);
+				removeAll();
+
+				PanelGerenciamento pGerenciamento = new PanelGerenciamento();
+				setVisible(false);
+				Inicio.panelInicio(pGerenciamento);
+				pGerenciamento.setVisible(true);
+
+			} catch (Exception e) {
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Ocorreu um erro ao tentar cadastrar o serviço! \nPor favor, verifique todos os dados", ":(",
+						JOptionPane.ERROR_MESSAGE);
+			}
 
 		}
 		if (ae.getSource() == bLimpar) {
 
+			tNome.setText("");
+			tDescricao.setText("");
+			tPreco.setText("");
 		}
 
 		if (ae.getSource() == bVoltar) {

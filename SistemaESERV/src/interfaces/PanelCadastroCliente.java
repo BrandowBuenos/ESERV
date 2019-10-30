@@ -14,7 +14,7 @@ import java.awt.event.*;
 public class PanelCadastroCliente extends JPanel implements ActionListener {
 
 	private JLabel lClientes;
-	
+
 	private JLabel lConsultaCpf;
 	private JTextField tConsultaCpf;
 
@@ -57,20 +57,27 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 	private JLabel lEmail;
 	private JTextField tEmail;
 
-	private JButton bCadastrar;
 	private JButton bEnviar;
 	private JButton bLimpar;
-	
+
+	private JButton bCadastrar;
+	private JButton bLimpar1;
+
 	private JButton bVoltar;
-	
-	
 
 	PanelCadastroCliente() {
-		
+
 		setBackground(Color.WHITE);
 		setBounds(550, 0, 820, 768);
 		setLayout(null);
 		
+		lClientes = new JLabel("");
+		lClientes.setBounds(350, 130, 350, 60);
+		lClientes.setFont(new Font("Arial", Font.TRUETYPE_FONT, 30));
+		lClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/user.png")));
+		lClientes.setForeground(new Color(70, 130, 180));
+		add(lClientes);
+
 		lClientes = new JLabel("Cadastro de Cliente");
 		lClientes.setBounds(240, 200, 350, 60);
 		lClientes.setFont(new Font("Arial", Font.TRUETYPE_FONT, 30));
@@ -88,6 +95,7 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 		tConsultaCpf.setBounds(280, 300, 280, 40);
 		tConsultaCpf.setFont(new Font("Arial", Font.PLAIN, 20));
 		tConsultaCpf.setForeground(new Color(92, 92, 92));
+		tConsultaCpf.setDocument(new Tratamento());
 		add(tConsultaCpf);
 
 		bVoltar = new JButton("<");
@@ -112,13 +120,13 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 		add(bLimpar);
 
 	}
-	
+
 	void PanelResultadoConsulta() {
 
 		setBackground(Color.WHITE);
 		setBounds(550, 0, 820, 768);
 		setLayout(null);
-		
+
 		bVoltar = new JButton("<");
 		bVoltar.setBounds(20, 20, 40, 40);
 		bVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -146,6 +154,7 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 
 		tNome = new JTextField("");
 		tNome.setBounds(100, 160, 250, 40);
+		tNome.setDocument(new Tratamento2());
 		add(tNome);
 
 		lCpf = new JLabel("CPF");
@@ -153,11 +162,13 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 		lCpf.setFont(new Font("Arial", Font.PLAIN, 20));
 		lCpf.setForeground(new Color(128, 128, 128));
 		add(lCpf);
-		
+
 		String cpf = tConsultaCpf.getText();
 
 		tCpf = new JTextField(cpf);
 		tCpf.setBounds(430, 160, 120, 40);
+		tCpf.setEditable(false);
+		tCpf.setEnabled(false);
 		add(tCpf);
 
 		lRg = new JLabel("RG");
@@ -168,6 +179,7 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 
 		tRg = new JTextField("");
 		tRg.setBounds(630, 160, 80, 40);
+		tRg.setDocument(new Tratamento());
 		add(tRg);
 
 		lClientes = new JLabel("Endereço");
@@ -194,6 +206,7 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 
 		tNumero = new JTextField("");
 		tNumero.setBounds(340, 320, 90, 40);
+		tNumero.setDocument(new Tratamento());
 		add(tNumero);
 
 		lComplemento = new JLabel("Complemento");
@@ -204,6 +217,7 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 
 		tComplemento = new JTextField("");
 		tComplemento.setBounds(460, 320, 250, 40);
+		tComplemento.setDocument(new Tratamento2());
 		add(tComplemento);
 
 		lCep = new JLabel("CEP");
@@ -214,6 +228,7 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 
 		tCep = new JTextField("");
 		tCep.setBounds(20, 410, 90, 40);
+		tCep.setDocument(new Tratamento());
 		add(tCep);
 
 		lBairro = new JLabel("Bairro");
@@ -224,6 +239,7 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 
 		tBairro = new JTextField("");
 		tBairro.setBounds(140, 410, 170, 40);
+		tBairro.setDocument(new Tratamento2());
 		add(tBairro);
 
 		lCidade = new JLabel("Cidade");
@@ -234,6 +250,7 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 
 		tCidade = new JTextField("");
 		tCidade.setBounds(340, 410, 170, 40);
+		tCidade.setDocument(new Tratamento2());
 		add(tCidade);
 
 		lEstado = new JLabel("Estado");
@@ -244,6 +261,7 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 
 		tEstado = new JTextField("");
 		tEstado.setBounds(540, 410, 170, 40);
+		tEstado.setDocument(new Tratamento2());
 		add(tEstado);
 
 		lClientes = new JLabel("Contato");
@@ -270,6 +288,7 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 
 		tTelefoneResidencial = new JTextField("");
 		tTelefoneResidencial.setBounds(340, 560, 170, 40);
+		tTelefoneResidencial.setDocument(new Tratamento());
 		add(tTelefoneResidencial);
 
 		lTelefoneCelular = new JLabel("Celular");
@@ -280,6 +299,7 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 
 		tTelefoneCelular = new JTextField("");
 		tTelefoneCelular.setBounds(540, 560, 170, 40);
+		tTelefoneCelular.setDocument(new Tratamento());
 		add(tTelefoneCelular);
 
 		bCadastrar = new JButton("Cadastrar");
@@ -289,85 +309,124 @@ public class PanelCadastroCliente extends JPanel implements ActionListener {
 		bCadastrar.setForeground(new Color(0, 128, 128));
 		add(bCadastrar);
 
-		bLimpar = new JButton("Limpar");
-		bLimpar.setBounds(330, 640, 180, 60);
-		bLimpar.setFont(new Font("Arial", Font.PLAIN, 20));
-		bLimpar.setForeground(new Color(205, 92, 92));
-		bLimpar.addActionListener(this);
-		add(bLimpar);
-		
+		bLimpar1 = new JButton("Limpar");
+		bLimpar1.setBounds(330, 640, 180, 60);
+		bLimpar1.setFont(new Font("Arial", Font.PLAIN, 20));
+		bLimpar1.setForeground(new Color(205, 92, 92));
+		bLimpar1.addActionListener(this);
+		add(bLimpar1);
 
-		repaint(); 
+		repaint();
 
 	}
 
 	public void actionPerformed(ActionEvent ae) {
-		
+
 		if (ae.getSource() == bEnviar) {
 
-			removeAll();
-			PanelResultadoConsulta();
+			String cpfStg = tConsultaCpf.getText();
+			long cpf = Long.parseLong(cpfStg);
+
+			if (GerenciarClientes.existe(cpf) == true) {
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Este CPF já foi cadastrado! \n Por favor, tente outro cpf válido.", ":(",
+						JOptionPane.ERROR_MESSAGE);
+				tConsultaCpf.setText("");
+
+			} else {
+				removeAll();
+				PanelResultadoConsulta();
+			}
 
 		}
 
 		if (ae.getSource() == bCadastrar) {
 
-			String cpfStg = tCpf.getText();
-			long cpf = Long.parseLong(cpfStg);
+			try {
+				String cpfStg = tCpf.getText();
+				long cpf = Long.parseLong(cpfStg);
 
-			String nome = tNome.getText();
+				String nome = tNome.getText();
 
-			String logradouro = tLogradouro.getText();
+				String logradouro = tLogradouro.getText();
 
-			String logStg = tNumero.getText();
-			int numero = Integer.parseInt(logStg);
+				String logStg = tNumero.getText();
+				int numero = Integer.parseInt(logStg);
 
-			String bairro = tBairro.getText();
+				String bairro = tBairro.getText();
 
-			String cidade = tCidade.getText();
+				String cidade = tCidade.getText();
 
-			String estado = tEstado.getText();
+				String estado = tEstado.getText();
 
-			Pessoa novoCliente = new Cliente(nome, cpf, logradouro, numero, bairro, cidade, estado);
+				Pessoa novoCliente = new Cliente(nome, cpf, logradouro, numero, bairro, cidade, estado);
 
-			String rgStg = tRg.getText();
-			long rg = Long.parseLong(rgStg);
-			novoCliente.setRg(rg);
+				String rgStg = tRg.getText();
+				long rg = Long.parseLong(rgStg);
+				novoCliente.setRg(rg);
 
-			String cepStg = tCep.getText();
-			long cep = Long.parseLong(cepStg);
-			novoCliente.setCep(cep);
+				String cepStg = tCep.getText();
+				long cep = Long.parseLong(cepStg);
+				novoCliente.setCep(cep);
 
-			String complemento = tComplemento.getText();
-			novoCliente.setComplemento(complemento);
+				String complemento = tComplemento.getText();
+				novoCliente.setComplemento(complemento);
 
-			String telefoneResidencialStg = tTelefoneResidencial.getText();
-			long telefoneResidencial = Long.parseLong(telefoneResidencialStg);
-			novoCliente.setTelefoneResidencial(telefoneResidencial);
+				String telefoneResidencialStg = tTelefoneResidencial.getText();
+				long telefoneResidencial = Long.parseLong(telefoneResidencialStg);
+				novoCliente.setTelefoneResidencial(telefoneResidencial);
 
-			String telefoneCelularStg = tTelefoneCelular.getText();
-			long telefoneCelular = Long.parseLong(telefoneCelularStg);
-			novoCliente.setTelefoneCelular(telefoneCelular);
+				String telefoneCelularStg = tTelefoneCelular.getText();
+				long telefoneCelular = Long.parseLong(telefoneCelularStg);
+				novoCliente.setTelefoneCelular(telefoneCelular);
 
-			String email = tEmail.getText();
-			novoCliente.setEmail(email);
+				String email = tEmail.getText();
+				novoCliente.setEmail(email);
 
-			GerenciarClientes.AdicionarCliente(novoCliente);
-			
-			removeAll();
-			
-			PanelGerenciamento pGerenciamento = new PanelGerenciamento();
-			setVisible(false);
-			Inicio.panelInicio(pGerenciamento);
-			pGerenciamento.setVisible(true);
+				GerenciarClientes.AdicionarCliente(novoCliente);
 
-		
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame, "O cliente " + nome + " foi cadastrado com sucesso! ", ":)",
+						JOptionPane.INFORMATION_MESSAGE);
+
+				removeAll();
+
+				PanelGerenciamento pGerenciamento = new PanelGerenciamento();
+				setVisible(false);
+				Inicio.panelInicio(pGerenciamento);
+				pGerenciamento.setVisible(true);
+
+			} catch (Exception e) {
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Ocorreu um erro ao tentar cadastrar o cliente! \nPor favor, verifique todos os dados", ":(",
+						JOptionPane.ERROR_MESSAGE);
+			}
+
 		}
 
 		if (ae.getSource() == bLimpar) {
+			tConsultaCpf.setText("");
 
 		}
-		
+
+		if (ae.getSource() == bLimpar1) {
+			tNome.setText("");
+			tRg.setText("");
+			tCep.setText("");
+			tLogradouro.setText("");
+			tComplemento.setText("");
+			tBairro.setText("");
+			tCidade.setText("");
+			tEstado.setText("");
+			tNumero.setText("");
+			tEmail.setText("");
+			tTelefoneCelular.setText("");
+			tTelefoneResidencial.setText("");
+
+		}
+
 		if (ae.getSource() == bVoltar) {
 
 			removeAll();

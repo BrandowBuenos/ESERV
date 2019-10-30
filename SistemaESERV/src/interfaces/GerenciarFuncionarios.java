@@ -35,6 +35,11 @@ public class GerenciarFuncionarios {
 
 	}
 
+	protected static boolean existe(long cpf) {
+		return gerenciamentoDeFuncionario.existe(cpf);
+
+	}
+	
 	protected static void RemoverFuncionario(long cpf) {
 		gerenciamentoDeFuncionario.remove(cpf);
 	}

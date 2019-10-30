@@ -29,6 +29,12 @@ public class GerenciarEstoques {
 		gerenciamentoDeProdutos.set(codigo, p);
 
 	}
+	
+	protected static boolean existe(int codigo) {
+		return gerenciamentoDeProdutos.existe(codigo);
+
+	}
+
 
 	protected static void RemoverProduto(int codigo) {
 		gerenciamentoDeProdutos.remove(codigo);

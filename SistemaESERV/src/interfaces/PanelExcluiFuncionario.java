@@ -30,7 +30,7 @@ public class PanelExcluiFuncionario extends JPanel implements ActionListener {
 		setBackground(Color.WHITE);
 		setBounds(550, 0, 820, 768);
 		setLayout(null);
-		
+
 		lFuncionario = new JLabel("");
 		lFuncionario.setBounds(350, 130, 350, 60);
 		lFuncionario.setFont(new Font("Arial", Font.TRUETYPE_FONT, 30));
@@ -55,6 +55,7 @@ public class PanelExcluiFuncionario extends JPanel implements ActionListener {
 		tConsultaCpf.setBounds(280, 300, 280, 40);
 		tConsultaCpf.setFont(new Font("Arial", Font.PLAIN, 20));
 		tConsultaCpf.setForeground(new Color(92, 92, 92));
+		tConsultaCpf.setDocument(new Tratamento());
 		add(tConsultaCpf);
 
 		bVoltar = new JButton("<");
@@ -80,65 +81,44 @@ public class PanelExcluiFuncionario extends JPanel implements ActionListener {
 
 	}
 
-	void PainelResultadoConsulta() {
-		setBackground(Color.WHITE);
-		setBounds(550, 0, 820, 768);
-		setLayout(null);
-		
-		lFuncionario = new JLabel("Excluir Funcionario");
-		lFuncionario.setBounds(280, 20, 350, 60);
-		lFuncionario.setFont(new Font("Arial", Font.PLAIN, 30));
-		lFuncionario.setForeground(new Color(128, 128, 128));
-		add(lFuncionario);
-
-		lConsultaCpf = new JLabel("CPF");
-		lConsultaCpf.setBounds(200, 130, 350, 40);
-		lConsultaCpf.setFont(new Font("Arial", Font.PLAIN, 20));
-		lConsultaCpf.setForeground(new Color(128, 128, 128));
-		add(lConsultaCpf);
-
-		tConsultaCpf = new JTextField("");
-		tConsultaCpf.setBounds(300, 130, 200, 40);
-		add(tConsultaCpf);
-
-		bEnviar = new JButton("Remover");
-		bEnviar.setBounds(200, 200, 180, 60);
-		bEnviar.setFont(new Font("Arial", Font.PLAIN, 20));
-		bEnviar.addActionListener(this);
-		bEnviar.setForeground(new Color(0, 128, 128));
-		add(bEnviar);
-
-	}
-
-	void PanelResultadoConsulta() {
-
-		String cpfStg = tConsultaCpf.getText();
-		long consultaCpf = Long.parseLong(cpfStg);
-
-		GerenciarFuncionarios.RemoverFuncionario(consultaCpf);
-
-		lFuncionario = new JLabel("Resultado: ");
-		lFuncionario.setBounds(20, 280, 350, 60);
-		lFuncionario.setFont(new Font("Arial", Font.PLAIN, 20));
-		lFuncionario.setForeground(new Color(128, 128, 128));
-		add(lFuncionario);
-
-		bVoltar = new JButton("Voltar");
-		bVoltar.setBounds(400, 600, 180, 60);
-		bVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
-		bVoltar.setForeground(new Color(205, 92, 92));
-		bVoltar.addActionListener(this);
-		add(bVoltar);
-
-		repaint(); 
-
-	}
-
 	public void actionPerformed(ActionEvent ae) {
 
 		if (ae.getSource() == bEnviar) {
-			removeAll();
-			PanelResultadoConsulta();
+
+			String cpfStg = tConsultaCpf.getText();
+			long cpf = Long.parseLong(cpfStg);
+
+			if (GerenciarFuncionarios.existe(cpf) == false) {
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Nenhum funcionário com este CPF foi encontrado! \nPor favor, tente outro cpf válido.", ":(",
+						JOptionPane.ERROR_MESSAGE);
+				tConsultaCpf.setText("");
+
+			} else {
+
+				try {
+
+					GerenciarFuncionarios.RemoverFuncionario(cpf);
+
+					Component frame = null;
+					JOptionPane.showMessageDialog(frame, "O funcionário foi removido com sucesso! ", ":)",
+							JOptionPane.INFORMATION_MESSAGE);
+
+					removeAll();
+					PanelGerenciamento pGerenciamento = new PanelGerenciamento();
+					setVisible(false);
+					Inicio.panelInicio(pGerenciamento);
+					pGerenciamento.setVisible(true);
+
+				} catch (Exception e) {
+
+					Component frame = null;
+					JOptionPane.showMessageDialog(frame,
+							"Ocorreu um erro ao tentar remover este cliente! \nPor favor, verifique todos os dados",
+							":(", JOptionPane.ERROR_MESSAGE);
+				}
+			}
 
 		}
 

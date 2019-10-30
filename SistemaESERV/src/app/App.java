@@ -3,7 +3,7 @@ package app;
 import interfaces.*;
 
 /**
- * APP
+ * Classe App, main do projeto
  */
 public class App {
 

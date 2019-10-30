@@ -15,11 +15,7 @@ import java.util.ArrayList;
  */
 public class PanelConsultaEstoque extends JPanel implements ActionListener {
 
-
 	private JLabel lEstoque;
-
-	private JButton bEnviar;
-	private JButton bLimpar;
 
 	ArrayList<Produto> listaDeProdutos = new ArrayList<Produto>();
 	private JComboBox<String> jCFuncionarios;
@@ -45,23 +41,31 @@ public class PanelConsultaEstoque extends JPanel implements ActionListener {
 		bVoltar.addActionListener(this);
 		add(bVoltar);
 
-		String[] colunas = { "Nome" };
+		String[] colunas = { "Produtos cadastrados" };
 
-		String p = GerenciarEstoques.ConsultarProduto();
+		if (GerenciarEstoques.ConsultarProduto() == "") {
+			Object[][] dados = { { "Nenhum produto cadastrado ainda!" } };
+			JTable tabela = new JTable(dados, colunas);
+			add(tabela);
+			JScrollPane barraRolagem = new JScrollPane(tabela);
+			add(barraRolagem);
 
-		Object[][] dados = { { p } };
+			barraRolagem.setBounds(40, 200, 650, 200);
+		} else {
+			String p = GerenciarEstoques.ConsultarProduto();
+			Object[][] dados = { { p } };
+			JTable tabela = new JTable(dados, colunas);
+			add(tabela);
+			JScrollPane barraRolagem = new JScrollPane(tabela);
+			add(barraRolagem);
 
-		JTable tabela = new JTable(dados, colunas);
-		add(tabela);
+			barraRolagem.setBounds(40, 200, 650, 200);
+		}
 
-		JScrollPane barraRolagem = new JScrollPane(tabela);
-		add(barraRolagem);
-
-		barraRolagem.setBounds(40, 200, 650, 200);
-		
 		jCFuncionarios = new javax.swing.JComboBox<String>();
-		jCFuncionarios.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Estoque" }));
-		jCFuncionarios.setBounds(20, 450, 400, 300);
+		jCFuncionarios.setModel(
+				new javax.swing.DefaultComboBoxModel<String>(new String[] { "Produtos do estoque cadastrado" }));
+		jCFuncionarios.setBounds(40, 350, 650, 300);
 		for (int i = 0; i < ProdutosController.getListaDeProdutos().size(); i++) {
 			jCFuncionarios.addItem(ProdutosController.getListaDeProdutos().get(i).toString());
 		}

@@ -29,18 +29,18 @@ public class PanelPrestacaoConta extends JPanel implements ActionListener {
 		add(bVoltar);
 
 		lServicosPrestados = new JLabel("");
-		lServicosPrestados.setBounds(140, 50, 350, 60);
+		lServicosPrestados.setBounds(360, 50, 350, 60);
 		lServicosPrestados.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/map.png")));
 		add(lServicosPrestados);
 
 		lServicosPrestados = new JLabel("Serviços prestados");
-		lServicosPrestados.setBounds(90, 100, 350, 60);
+		lServicosPrestados.setBounds(250, 100, 350, 60);
 		lServicosPrestados.setFont(new Font("Arial", Font.PLAIN, 30));
 		lServicosPrestados.setForeground(new Color(70, 130, 180));
 		add(lServicosPrestados);
 
 		bCadastroServicoPrestado = new JButton("  Cadastro");
-		bCadastroServicoPrestado.setBounds(0, 170, 330, 30);
+		bCadastroServicoPrestado.setBounds(0, 170, 200, 30);
 		bCadastroServicoPrestado.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/add-2.png")));
 		bCadastroServicoPrestado.setFont(new Font("Arial", Font.PLAIN, 25));
 		bCadastroServicoPrestado.setForeground(new Color(169, 169, 169));
@@ -49,7 +49,7 @@ public class PanelPrestacaoConta extends JPanel implements ActionListener {
 		add(bCadastroServicoPrestado);
 
 		bConsultarServicoPrestado = new JButton("  Consultar");
-		bConsultarServicoPrestado.setBounds(0, 220, 340, 30);
+		bConsultarServicoPrestado.setBounds(190, 170, 200, 30);
 		bConsultarServicoPrestado.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/search-2.png")));
 		bConsultarServicoPrestado.setFont(new Font("Arial", Font.PLAIN, 25));
 		bConsultarServicoPrestado.setForeground(new Color(169, 169, 169));
@@ -58,7 +58,7 @@ public class PanelPrestacaoConta extends JPanel implements ActionListener {
 		add(bConsultarServicoPrestado);
 
 		bEditarServicoPrestado = new JButton("  Editar");
-		bEditarServicoPrestado.setBounds(0, 270, 300, 30);
+		bEditarServicoPrestado.setBounds(360, 170, 200, 30);
 		bEditarServicoPrestado.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/edit.png")));
 		bEditarServicoPrestado.setFont(new Font("Arial", Font.PLAIN, 25));
 		bEditarServicoPrestado.setForeground(new Color(169, 169, 169));
@@ -67,7 +67,7 @@ public class PanelPrestacaoConta extends JPanel implements ActionListener {
 		add(bEditarServicoPrestado);
 
 		bExcluirServicoPrestado = new JButton("  Excluir");
-		bExcluirServicoPrestado.setBounds(0, 320, 310, 30);
+		bExcluirServicoPrestado.setBounds(520, 170, 200, 30);
 		bExcluirServicoPrestado.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/garbage.png")));
 		bExcluirServicoPrestado.setFont(new Font("Arial", Font.PLAIN, 25));
 		bExcluirServicoPrestado.setForeground(new Color(169, 169, 169));
@@ -93,10 +93,10 @@ public class PanelPrestacaoConta extends JPanel implements ActionListener {
 
 		if (ae.getSource() == bConsultarServicoPrestado) {
 
-			PanelConsultaServicosPrestados pConsultaServicosPrestados = new PanelConsultaServicosPrestados();
+			PanelConsultaServicoPrestado pConsultaServicoPrestado = new PanelConsultaServicoPrestado();
 			setVisible(false);
-			Inicio.panelInicio(pConsultaServicosPrestados);
-			pConsultaServicosPrestados.setVisible(true);
+			Inicio.panelInicio(pConsultaServicoPrestado);
+			pConsultaServicoPrestado.setVisible(true);
 
 		}
 
@@ -110,10 +110,10 @@ public class PanelPrestacaoConta extends JPanel implements ActionListener {
 
 		if (ae.getSource() == bExcluirServicoPrestado) {
 
-			PanelExcluiCliente pExcluiCliente = new PanelExcluiCliente();
+			PanelExcluiServicoPrestado pExcluiServicoPrestado = new PanelExcluiServicoPrestado();
 			setVisible(false);
-			Inicio.panelInicio(pExcluiCliente);
-			pExcluiCliente.setVisible(true);
+			Inicio.panelInicio(pExcluiServicoPrestado);
+			pExcluiServicoPrestado.setVisible(true);
 		}
 		
 		if (ae.getSource() == bVoltar) {

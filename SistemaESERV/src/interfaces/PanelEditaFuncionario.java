@@ -66,6 +66,7 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 
 	private JButton bEnviar;
 	private JButton bLimpar;
+	private JButton bLimpar1;
 
 	private JButton bVoltar;
 
@@ -152,7 +153,7 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		bVoltar.addActionListener(this);
 		add(bVoltar);
 
-		lFuncionario = new JLabel("Cadastro de funcionário");
+		lFuncionario = new JLabel("Edição de funcionário");
 		lFuncionario.setBounds(220, 20, 350, 60);
 		lFuncionario.setFont(new Font("Arial", Font.PLAIN, 30));
 		lFuncionario.setForeground(new Color(128, 128, 128));
@@ -170,8 +171,10 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		lNome.setForeground(new Color(128, 128, 128));
 		add(lNome);
 
-		tNome = new JTextField(f.getNome());
+		tNome = new JTextField("");
 		tNome.setBounds(100, 160, 250, 40);
+		tNome.setDocument(new Tratamento2());
+		tNome.setText(f.getNome());
 		add(tNome);
 
 		lCpf = new JLabel("CPF");
@@ -185,6 +188,8 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 
 		tCpf = new JTextField(cpf);
 		tCpf.setBounds(430, 160, 120, 40);
+		tCpf.setEditable(false);
+		tCpf.setEnabled(false);
 		add(tCpf);
 
 		lRg = new JLabel("RG");
@@ -196,8 +201,10 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		long rgLon = f.getRg();
 		String rg = String.valueOf(rgLon);
 
-		tRg = new JTextField(rg);
+		tRg = new JTextField("");
 		tRg.setBounds(630, 160, 80, 40);
+		tRg.setDocument(new Tratamento());
+		tRg.setText(rg);
 		add(tRg);
 
 		lCargo = new JLabel("Cargo");
@@ -219,8 +226,10 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		double vhDou = ((Funcionario) f).getValorHora();
 		String valorHora = String.valueOf(vhDou);
 
-		tValorHora = new JTextField(valorHora);
+		tValorHora = new JTextField("");
 		tValorHora.setBounds(470, 210, 80, 40);
+		tValorHora.setDocument(new Tratamento());
+		tValorHora.setText(valorHora);
 		add(tValorHora);
 
 		lFuncionario = new JLabel("Endereço");
@@ -248,8 +257,10 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		long numLon = f.getNumero();
 		String numero = String.valueOf(numLon);
 
-		tNumero = new JTextField(numero);
+		tNumero = new JTextField("");
 		tNumero.setBounds(340, 360, 90, 40);
+		tNumero.setDocument(new Tratamento());
+		tNumero.setText(numero);
 		add(tNumero);
 
 		lComplemento = new JLabel("Complemento");
@@ -258,8 +269,10 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		lComplemento.setForeground(new Color(128, 128, 128));
 		add(lComplemento);
 
-		tComplemento = new JTextField(f.getComplemento());
+		tComplemento = new JTextField("");
 		tComplemento.setBounds(460, 360, 250, 40);
+		tComplemento.setDocument(new Tratamento2());
+		tComplemento.setText(f.getComplemento());
 		add(tComplemento);
 
 		lCep = new JLabel("CEP");
@@ -271,8 +284,10 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		long cepLon = f.getCep();
 		String cep = String.valueOf(cepLon);
 
-		tCep = new JTextField(cep);
+		tCep = new JTextField("");
 		tCep.setBounds(20, 450, 90, 40);
+		tCep.setDocument(new Tratamento());
+		tCep.setText(cep);
 		add(tCep);
 
 		lBairro = new JLabel("Bairro");
@@ -281,8 +296,10 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		lBairro.setForeground(new Color(128, 128, 128));
 		add(lBairro);
 
-		tBairro = new JTextField(f.getBairro());
+		tBairro = new JTextField("");
 		tBairro.setBounds(140, 450, 170, 40);
+		tBairro.setDocument(new Tratamento2());
+		tBairro.setText(f.getBairro());
 		add(tBairro);
 
 		lCidade = new JLabel("Cidade");
@@ -291,8 +308,10 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		lCidade.setForeground(new Color(128, 128, 128));
 		add(lCidade);
 
-		tCidade = new JTextField(f.getCidade());
+		tCidade = new JTextField("");
 		tCidade.setBounds(340, 450, 170, 40);
+		tCidade.setDocument(new Tratamento2());
+		tCidade.setText(f.getCidade());
 		add(tCidade);
 
 		lEstado = new JLabel("Estado");
@@ -301,8 +320,10 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		lEstado.setForeground(new Color(128, 128, 128));
 		add(lEstado);
 
-		tEstado = new JTextField(f.getEstado());
+		tEstado = new JTextField("");
 		tEstado.setBounds(540, 450, 170, 40);
+		tEstado.setDocument(new Tratamento2());
+		tEstado.setText(f.getEstado());
 		add(tEstado);
 
 		lFuncionario = new JLabel("Contato");
@@ -330,8 +351,10 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		long nrLon = f.getTelefoneResidencial();
 		String telefoneResidencial = String.valueOf(nrLon);
 
-		tTelefoneResidencial = new JTextField(telefoneResidencial);
+		tTelefoneResidencial = new JTextField("");
 		tTelefoneResidencial.setBounds(340, 600, 170, 40);
+		tTelefoneResidencial.setDocument(new Tratamento());
+		tTelefoneResidencial.setText(telefoneResidencial);
 		add(tTelefoneResidencial);
 
 		lTelefoneCelular = new JLabel("Celular");
@@ -343,8 +366,10 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		Long ntLon = f.getTelefoneCelular();
 		String telefoneCelular = String.valueOf(ntLon);
 
-		tTelefoneCelular = new JTextField(telefoneCelular);
+		tTelefoneCelular = new JTextField("");
 		tTelefoneCelular.setBounds(540, 600, 170, 40);
+		tTelefoneCelular.setDocument(new Tratamento());
+		tTelefoneCelular.setText(telefoneCelular);
 		add(tTelefoneCelular);
 
 		bEditar = new JButton("Enviar");
@@ -354,12 +379,12 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 		bEditar.setForeground(new Color(0, 128, 128));
 		add(bEditar);
 
-		bLimpar = new JButton("Limpar");
-		bLimpar.setBounds(330, 660, 180, 60);
-		bLimpar.setFont(new Font("Arial", Font.PLAIN, 20));
-		bLimpar.setForeground(new Color(205, 92, 92));
-		bLimpar.addActionListener(this);
-		add(bLimpar);
+		bLimpar1 = new JButton("Limpar");
+		bLimpar1.setBounds(330, 660, 180, 60);
+		bLimpar1.setFont(new Font("Arial", Font.PLAIN, 20));
+		bLimpar1.setForeground(new Color(205, 92, 92));
+		bLimpar1.addActionListener(this);
+		add(bLimpar1);
 
 		repaint();
 
@@ -371,6 +396,29 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 
 			removeAll();
 			PanelResultadoConsulta();
+
+		}
+
+		if (ae.getSource() == bLimpar) {
+			tConsultaCpf.setText("");
+
+		}
+
+		if (ae.getSource() == bLimpar1) {
+			tNome.setText("");
+			tRg.setText("");
+			tCargo.setText("");
+			tValorHora.setText("");
+			tCep.setText("");
+			tLogradouro.setText("");
+			tComplemento.setText("");
+			tBairro.setText("");
+			tCidade.setText("");
+			tEstado.setText("");
+			tNumero.setText("");
+			tEmail.setText("");
+			tTelefoneCelular.setText("");
+			tTelefoneResidencial.setText("");
 
 		}
 
@@ -386,66 +434,78 @@ public class PanelEditaFuncionario extends JPanel implements ActionListener {
 
 		if (ae.getSource() == bEditar) {
 
-			Pessoa funcionarioEditado = new Funcionario(codigo);
+			try {
+				Pessoa funcionarioEditado = new Funcionario(codigo);
 
-			String cpfStg = tCpf.getText();
-			long cpf = Long.parseLong(cpfStg);
-			funcionarioEditado.setCpf(cpf);
-			
-			String nome = tNome.getText();
-			funcionarioEditado.setNome(nome);
+				String cpfStg = tCpf.getText();
+				long cpf = Long.parseLong(cpfStg);
+				funcionarioEditado.setCpf(cpf);
 
-			String cargo = tCargo.getText();
-			((Funcionario) funcionarioEditado).setCargo(cargo);
-			
-			String vhgStg = tValorHora.getText();
-			double valorHora = Double.parseDouble(vhgStg);
-			((Funcionario) funcionarioEditado).setValorHora(valorHora);
+				String nome = tNome.getText();
+				funcionarioEditado.setNome(nome);
 
-			String logradouro = tLogradouro.getText();
-			funcionarioEditado.setLogradouro(logradouro);
+				String cargo = tCargo.getText();
+				((Funcionario) funcionarioEditado).setCargo(cargo);
 
-			String logStg = tNumero.getText();
-			int numero = Integer.parseInt(logStg);
-			funcionarioEditado.setNumero(numero);
+				String vhgStg = tValorHora.getText();
+				double valorHora = Double.parseDouble(vhgStg);
+				((Funcionario) funcionarioEditado).setValorHora(valorHora);
 
-			String bairro = tBairro.getText();
-			funcionarioEditado.setBairro(bairro);
+				String logradouro = tLogradouro.getText();
+				funcionarioEditado.setLogradouro(logradouro);
 
-			String cidade = tCidade.getText();
-			funcionarioEditado.setCidade(cidade);
+				String logStg = tNumero.getText();
+				int numero = Integer.parseInt(logStg);
+				funcionarioEditado.setNumero(numero);
 
-			String estado = tEstado.getText();
-			funcionarioEditado.setEstado(estado);
+				String bairro = tBairro.getText();
+				funcionarioEditado.setBairro(bairro);
 
-			String rgStg = tRg.getText();
-			long rg = Long.parseLong(rgStg);
-			funcionarioEditado.setRg(rg);
+				String cidade = tCidade.getText();
+				funcionarioEditado.setCidade(cidade);
 
-			String cepStg = tCep.getText();
-			long cep = Long.parseLong(cepStg);
-			funcionarioEditado.setCep(cep);
+				String estado = tEstado.getText();
+				funcionarioEditado.setEstado(estado);
 
-			String complemento = tComplemento.getText();
-			funcionarioEditado.setComplemento(complemento);
+				String rgStg = tRg.getText();
+				long rg = Long.parseLong(rgStg);
+				funcionarioEditado.setRg(rg);
 
-			String telefoneResidencialStg = tTelefoneResidencial.getText();
-			long telefoneResidencial = Long.parseLong(telefoneResidencialStg);
-			funcionarioEditado.setTelefoneResidencial(telefoneResidencial);
+				String cepStg = tCep.getText();
+				long cep = Long.parseLong(cepStg);
+				funcionarioEditado.setCep(cep);
 
-			String telefoneCelularStg = tTelefoneCelular.getText();
-			long telefoneCelular = Long.parseLong(telefoneCelularStg);
-			funcionarioEditado.setTelefoneCelular(telefoneCelular);
+				String complemento = tComplemento.getText();
+				funcionarioEditado.setComplemento(complemento);
 
-			String email = tEmail.getText();
-			funcionarioEditado.setEmail(email);
+				String telefoneResidencialStg = tTelefoneResidencial.getText();
+				long telefoneResidencial = Long.parseLong(telefoneResidencialStg);
+				funcionarioEditado.setTelefoneResidencial(telefoneResidencial);
 
-			GerenciarFuncionarios.editarFuncionario(cpf, funcionarioEditado);
+				String telefoneCelularStg = tTelefoneCelular.getText();
+				long telefoneCelular = Long.parseLong(telefoneCelularStg);
+				funcionarioEditado.setTelefoneCelular(telefoneCelular);
 
-			PanelGerenciamento pGerenciamento = new PanelGerenciamento();
-			setVisible(false);
-			Inicio.panelInicio(pGerenciamento);
-			pGerenciamento.setVisible(true);
+				String email = tEmail.getText();
+				funcionarioEditado.setEmail(email);
+
+				GerenciarFuncionarios.editarFuncionario(cpf, funcionarioEditado);
+
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame, "O funcionário " + nome + " foi editado com sucesso! ", ":)",
+						JOptionPane.INFORMATION_MESSAGE);
+
+				PanelGerenciamento pGerenciamento = new PanelGerenciamento();
+				setVisible(false);
+				Inicio.panelInicio(pGerenciamento);
+				pGerenciamento.setVisible(true);
+
+			} catch (Exception e) {
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Ocorreu um erro ao tentar editar este funcionário! \nPor favor, verifique todos os dados",
+						":(", JOptionPane.ERROR_MESSAGE);
+			}
 
 		}
 	}

@@ -32,6 +32,8 @@ public class PanelEditaEstoque extends JPanel implements ActionListener {
 	private JButton bEnviar;
 	private JButton bLimpar;
 
+	private JButton bLimpar1;
+
 	private JButton bVoltar;
 
 	private JButton bEditar;
@@ -40,6 +42,13 @@ public class PanelEditaEstoque extends JPanel implements ActionListener {
 		setBackground(Color.WHITE);
 		setBounds(550, 0, 820, 768);
 		setLayout(null);
+		
+		lEstoque = new JLabel("");
+		lEstoque.setBounds(350, 130, 350, 60);
+		lEstoque.setFont(new Font("Arial", Font.TRUETYPE_FONT, 30));
+		lEstoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/barcode.png")));
+		lEstoque.setForeground(new Color(70, 130, 180));
+		add(lEstoque);
 
 		lEstoque = new JLabel("Edição de Estoque");
 		lEstoque.setBounds(250, 200, 350, 60);
@@ -58,6 +67,7 @@ public class PanelEditaEstoque extends JPanel implements ActionListener {
 		tConsultaCodigo.setBounds(310, 300, 250, 40);
 		tConsultaCodigo.setFont(new Font("Arial", Font.PLAIN, 20));
 		tConsultaCodigo.setForeground(new Color(92, 92, 92));
+		tConsultaCodigo.setDocument(new Tratamento());
 		add(tConsultaCodigo);
 
 		bVoltar = new JButton("<");
@@ -172,12 +182,12 @@ public class PanelEditaEstoque extends JPanel implements ActionListener {
 		bEditar.setForeground(new Color(0, 128, 128));
 		add(bEditar);
 
-		bLimpar = new JButton("Limpar");
-		bLimpar.setBounds(350, 640, 180, 60);
-		bLimpar.setFont(new Font("Arial", Font.PLAIN, 20));
-		bLimpar.setForeground(new Color(205, 92, 92));
-		bLimpar.addActionListener(this);
-		add(bLimpar);
+		bLimpar1 = new JButton("Limpar");
+		bLimpar1.setBounds(350, 640, 180, 60);
+		bLimpar1.setFont(new Font("Arial", Font.PLAIN, 20));
+		bLimpar1.setForeground(new Color(205, 92, 92));
+		bLimpar1.addActionListener(this);
+		add(bLimpar1);
 
 		repaint();
 
@@ -187,8 +197,33 @@ public class PanelEditaEstoque extends JPanel implements ActionListener {
 
 		if (ae.getSource() == bEnviar) {
 
-			removeAll();
-			PanelResultadoConsulta();
+			String codStg = tConsultaCodigo.getText();
+			int consultaCodigo = Integer.parseInt(codStg);
+
+			if (GerenciarEstoques.existe(consultaCodigo) == false) {
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Nenhum produto com este código foi encontrado! \nPor favor, tente outro código válido.", ":(",
+						JOptionPane.ERROR_MESSAGE);
+				tConsultaCodigo.setText("");
+
+			} else {
+				removeAll();
+				PanelResultadoConsulta();
+			}
+
+		}
+
+		if (ae.getSource() == bLimpar) {
+			tConsultaCodigo.setText("");
+
+		}
+
+		if (ae.getSource() == bLimpar1) {
+			tNome.setText("");
+			tDescricao.setText("");
+			tQuantidade.setText("");
+			tPrecoUnitario.setText("");
 
 		}
 
@@ -204,33 +239,45 @@ public class PanelEditaEstoque extends JPanel implements ActionListener {
 
 		if (ae.getSource() == bEditar) {
 
-			String codStg = tConsultaCodigo.getText();
-			int codigo = Integer.parseInt(codStg);
+			try {
+				String codStg = tConsultaCodigo.getText();
+				int codigo = Integer.parseInt(codStg);
 
-			Produto produtoEditado = new Produto(codigo);
+				Produto produtoEditado = new Produto(codigo);
 
-			String nome = tNome.getText();
-			produtoEditado.setNome(nome);
+				String nome = tNome.getText();
+				produtoEditado.setNome(nome);
 
-			String quantidadeStg = tQuantidade.getText();
-			int quantidade = Integer.parseInt(quantidadeStg);
-			produtoEditado.setQuantidade(quantidade);
+				String quantidadeStg = tQuantidade.getText();
+				int quantidade = Integer.parseInt(quantidadeStg);
+				produtoEditado.setQuantidade(quantidade);
 
-			String precoStg = tPrecoUnitario.getText();
-			float precoUnitario = Float.parseFloat(precoStg);
-			produtoEditado.setPrecoUnitario(precoUnitario);
+				String precoStg = tPrecoUnitario.getText();
+				float precoUnitario = Float.parseFloat(precoStg);
+				produtoEditado.setPrecoUnitario(precoUnitario);
 
-			String descricao = tDescricao.getText();
-			produtoEditado.setDescricao(descricao);
+				String descricao = tDescricao.getText();
+				produtoEditado.setDescricao(descricao);
 
-			GerenciarEstoques.EditarProduto(codigo, produtoEditado);
+				GerenciarEstoques.EditarProduto(codigo, produtoEditado);
 
-			removeAll();
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame, "O produto " + nome + " de código " +codigo+" foi editado com sucesso! ", ":)",
+						JOptionPane.INFORMATION_MESSAGE);
 
-			PanelGerenciamento pGerenciamento = new PanelGerenciamento();
-			setVisible(false);
-			Inicio.panelInicio(pGerenciamento);
-			pGerenciamento.setVisible(true);
+				removeAll();
+
+				PanelGerenciamento pGerenciamento = new PanelGerenciamento();
+				setVisible(false);
+				Inicio.panelInicio(pGerenciamento);
+				pGerenciamento.setVisible(true);
+
+			} catch (Exception e) {
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Ocorreu um erro ao tentar editar este produto! \nPor favor, verifique todos os dados", ":(",
+						JOptionPane.ERROR_MESSAGE);
+			}
 
 		}
 	}

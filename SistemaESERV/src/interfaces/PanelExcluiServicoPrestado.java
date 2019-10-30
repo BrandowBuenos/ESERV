@@ -6,16 +6,13 @@ import javax.swing.*;
 import stocks.*;
 
 import java.awt.event.*;
-import java.util.Scanner;
 
 /**
  * PanelGerenciamento
  */
-public class PanelExcluiEstoque extends JPanel implements ActionListener {
+public class PanelExcluiServicoPrestado extends JPanel implements ActionListener {
 
-	Produto novoProduto;
-
-	private JLabel lEstoque;
+	private JLabel lServicos;
 
 	private JLabel lConsultaCodigo;
 	private JTextField tConsultaCodigo;
@@ -25,24 +22,24 @@ public class PanelExcluiEstoque extends JPanel implements ActionListener {
 
 	private JButton bVoltar;
 
-	PanelExcluiEstoque() {
+	PanelExcluiServicoPrestado() {
 
 		setBackground(Color.WHITE);
 		setBounds(550, 0, 820, 768);
 		setLayout(null);
 
-		lEstoque = new JLabel("");
-		lEstoque.setBounds(350, 130, 350, 60);
-		lEstoque.setFont(new Font("Arial", Font.TRUETYPE_FONT, 30));
-		lEstoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/barcode.png")));
-		lEstoque.setForeground(new Color(70, 130, 180));
-		add(lEstoque);
+		lServicos = new JLabel("");
+		lServicos.setBounds(350, 130, 350, 60);
+		lServicos.setFont(new Font("Arial", Font.TRUETYPE_FONT, 30));
+		lServicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/map.png")));
+		lServicos.setForeground(new Color(70, 130, 180));
+		add(lServicos);
 
-		lEstoque = new JLabel("Remoção de Produto");
-		lEstoque.setBounds(200, 200, 350, 60);
-		lEstoque.setFont(new Font("Arial", Font.TRUETYPE_FONT, 30));
-		lEstoque.setForeground(new Color(70, 130, 180));
-		add(lEstoque);
+		lServicos = new JLabel("Remoção de Serviço Prestado");
+		lServicos.setBounds(200, 200, 350, 60);
+		lServicos.setFont(new Font("Arial", Font.TRUETYPE_FONT, 30));
+		lServicos.setForeground(new Color(70, 130, 180));
+		add(lServicos);
 
 		lConsultaCodigo = new JLabel("  Código");
 		lConsultaCodigo.setBounds(180, 300, 350, 40);
@@ -84,22 +81,21 @@ public class PanelExcluiEstoque extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 
 		if (ae.getSource() == bEnviar) {
-
 			String codStg = tConsultaCodigo.getText();
-			int codigo = Integer.parseInt(codStg);
+			long codigo = Long.parseLong(codStg);
 
-			if (GerenciarEstoques.existe(codigo) == false) {
+			if (GerenciarServicosPrestados.existe(codigo) == false) {
 				Component frame = null;
 				JOptionPane.showMessageDialog(frame,
-						"Nenhum produto com este código foi encontrado! \nPor favor, tente outro código válido.", ":(",
-						JOptionPane.ERROR_MESSAGE);
+						"Nenhum serviço prestado com este código foi encontrado! \nPor favor, tente outro código válido.",
+						":(", JOptionPane.ERROR_MESSAGE);
 				tConsultaCodigo.setText("");
 
 			} else {
 				try {
-					GerenciarEstoques.RemoverProduto(codigo);
+					GerenciarServicosPrestados.excluirServicoPrestado(codigo);
 					Component frame = null;
-					JOptionPane.showMessageDialog(frame, "O produto foi removido com sucesso! ", ":)",
+					JOptionPane.showMessageDialog(frame, "O seviço prestado foi removido com sucesso! ", ":)",
 							JOptionPane.INFORMATION_MESSAGE);
 
 					removeAll();
@@ -111,7 +107,7 @@ public class PanelExcluiEstoque extends JPanel implements ActionListener {
 				} catch (Exception e) {
 					Component frame = null;
 					JOptionPane.showMessageDialog(frame,
-							"Ocorreu um erro ao tentar remover este produto! \nPor favor, verifique todos os dados",
+							"Ocorreu um erro ao tentar remover este serviço prestado! \nPor favor, verifique todos os dados",
 							":(", JOptionPane.ERROR_MESSAGE);
 				}
 			}

@@ -57,7 +57,6 @@ public class PanelCadastroEstoque extends JPanel implements ActionListener {
 		lProduto.setForeground(new Color(70, 130, 180));
 		add(lProduto);
 
-
 		lNome = new JLabel("Nome");
 		lNome.setBounds(20, 150, 350, 40);
 		lNome.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -78,13 +77,12 @@ public class PanelCadastroEstoque extends JPanel implements ActionListener {
 		tDescricao.setBounds(380, 190, 320, 40);
 		add(tDescricao);
 
-		
 		lProduto = new JLabel("Opções");
 		lProduto.setBounds(20, 250, 350, 60);
 		lProduto.setFont(new Font("Arial", Font.PLAIN, 25));
 		lProduto.setForeground(new Color(70, 130, 180));
 		add(lProduto);
-		
+
 		lQuantidade = new JLabel("Quantidade");
 		lQuantidade.setBounds(20, 310, 350, 40);
 		lQuantidade.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -93,9 +91,10 @@ public class PanelCadastroEstoque extends JPanel implements ActionListener {
 
 		tQuantidade = new JTextField("");
 		tQuantidade.setBounds(20, 350, 140, 40);
+		tQuantidade.setDocument(new Tratamento());
 		add(tQuantidade);
 
-		lPrecoUnitario = new JLabel("Preço Unitário");
+		lPrecoUnitario = new JLabel("Preço Unitário (R$)");
 		lPrecoUnitario.setBounds(200, 310, 350, 40);
 		lPrecoUnitario.setFont(new Font("Arial", Font.PLAIN, 20));
 		lPrecoUnitario.setForeground(new Color(128, 128, 128));
@@ -103,6 +102,7 @@ public class PanelCadastroEstoque extends JPanel implements ActionListener {
 
 		tPrecoUnitario = new JTextField("");
 		tPrecoUnitario.setBounds(200, 350, 290, 40);
+		tPrecoUnitario.setDocument(new Tratamento());
 		add(tPrecoUnitario);
 
 		bCadastrar = new JButton("Enviar");
@@ -123,30 +123,41 @@ public class PanelCadastroEstoque extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent ae) {
 
-
 		if (ae.getSource() == bCadastrar) {
 
-			String nome = tNome.getText();
+			try {
+				String nome = tNome.getText();
 
-			String quantidadeStg = tQuantidade.getText();
-			int quantidade = Integer.parseInt(quantidadeStg);
+				String quantidadeStg = tQuantidade.getText();
+				int quantidade = Integer.parseInt(quantidadeStg);
 
-			String precoStg = tPrecoUnitario.getText();
-			float preco = Float.parseFloat(precoStg);
-			
-			Produto novoProduto = new Produto(nome, quantidade, preco);
+				String precoStg = tPrecoUnitario.getText();
+				float preco = Float.parseFloat(precoStg);
 
-			String descricao = tDescricao.getText();
-			novoProduto.setDescricao(descricao);
+				Produto novoProduto = new Produto(nome, quantidade, preco);
 
-			GerenciarEstoques.AdicionarProduto(novoProduto);
+				String descricao = tDescricao.getText();
+				novoProduto.setDescricao(descricao);
 
-			removeAll();
+				GerenciarEstoques.AdicionarProduto(novoProduto);
+				
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame, "O produto " + nome + " foi cadastrado com sucesso! ", ":)",
+						JOptionPane.INFORMATION_MESSAGE);
 
-			PanelGerenciamento pGerenciamento = new PanelGerenciamento();
-			setVisible(false);
-			Inicio.panelInicio(pGerenciamento);
-			pGerenciamento.setVisible(true);
+				removeAll();
+
+				PanelGerenciamento pGerenciamento = new PanelGerenciamento();
+				setVisible(false);
+				Inicio.panelInicio(pGerenciamento);
+				pGerenciamento.setVisible(true);
+
+			} catch (Exception e) {
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Ocorreu um erro ao tentar cadastrar este produto! \nPor favor, verifique todos os dados", ":(",
+						JOptionPane.ERROR_MESSAGE);
+			}
 
 		}
 		if (ae.getSource() == bLimpar) {

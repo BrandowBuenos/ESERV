@@ -32,7 +32,7 @@ public class PanelConsultaFuncionario extends JPanel implements ActionListener {
 
 	private JButton bEnviar;
 	private JButton bLimpar;
-	
+
 	private JButton bVoltar;
 
 	PanelConsultaFuncionario() {
@@ -54,8 +54,9 @@ public class PanelConsultaFuncionario extends JPanel implements ActionListener {
 
 		tConsultaCpf = new JTextField("");
 		tConsultaCpf.setBounds(300, 120, 280, 40);
+		tConsultaCpf.setDocument(new Tratamento());
 		add(tConsultaCpf);
-		
+
 		bVoltar = new JButton("<");
 		bVoltar.setBounds(20, 20, 40, 40);
 		bVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -115,21 +116,19 @@ public class PanelConsultaFuncionario extends JPanel implements ActionListener {
 		lRg.setFont(new Font("Arial", Font.PLAIN, 20));
 		lRg.setForeground(new Color(128, 128, 128));
 		add(lRg);
-		
-		
-		lCargo = new JLabel("● Código: " + ((Funcionario) f).getCodigoFuncionario() +", Cargo: " + ((Funcionario) f).getCargo());
+
+		lCargo = new JLabel(
+				"● Código: " + ((Funcionario) f).getCodigoFuncionario() + ", Cargo: " + ((Funcionario) f).getCargo());
 		lCargo.setBounds(250, 400, 600, 40);
 		lCargo.setFont(new Font("Arial", Font.PLAIN, 20));
 		lCargo.setForeground(new Color(128, 128, 128));
 		add(lCargo);
-		
+
 		lValorHora = new JLabel("● Valor Hora: " + ((Funcionario) f).getValorHora());
 		lValorHora.setBounds(250, 430, 350, 40);
 		lValorHora.setFont(new Font("Arial", Font.PLAIN, 20));
 		lValorHora.setForeground(new Color(128, 128, 128));
 		add(lValorHora);
-		
-		
 
 		lClientes = new JLabel("Endereço");
 		lClientes.setBounds(20, 470, 350, 60);
@@ -137,7 +136,8 @@ public class PanelConsultaFuncionario extends JPanel implements ActionListener {
 		lClientes.setForeground(new Color(70, 130, 180));
 		add(lClientes);
 
-		lCep = new JLabel("● CEP: " + f.getCep()+ " - Endereço: " + f.getLogradouro() + ", Nº " + f.getNumero() + ", " + f.getComplemento());
+		lCep = new JLabel("● CEP: " + f.getCep() + " - Endereço: " + f.getLogradouro() + ", Nº " + f.getNumero() + ", "
+				+ f.getComplemento());
 		lCep.setBounds(20, 520, 650, 40);
 		lCep.setFont(new Font("Arial", Font.PLAIN, 20));
 		lCep.setForeground(new Color(128, 128, 128));
@@ -173,7 +173,7 @@ public class PanelConsultaFuncionario extends JPanel implements ActionListener {
 		lTelefoneCelular.setForeground(new Color(128, 128, 128));
 		add(lTelefoneCelular);
 
-		repaint(); // Repinta
+		repaint();
 
 	}
 
@@ -181,10 +181,23 @@ public class PanelConsultaFuncionario extends JPanel implements ActionListener {
 
 		if (ae.getSource() == bEnviar) {
 
-			PanelResultadoConsulta();
+			String cpfStg = tConsultaCpf.getText();
+			long cpf = Long.parseLong(cpfStg);
+
+			if (GerenciarFuncionarios.existe(cpf) == false) {
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Nenhum funcionário com este CPF foi encontrado! \nPor favor, tente outro cpf válido.", ":(",
+						JOptionPane.ERROR_MESSAGE);
+				tConsultaCpf.setText("");
+
+			} else {
+
+				PanelResultadoConsulta();
+			}
 
 		}
-		
+
 		if (ae.getSource() == bVoltar) {
 
 			removeAll();

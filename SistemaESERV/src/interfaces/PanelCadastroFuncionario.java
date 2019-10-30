@@ -76,14 +76,13 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 		setBounds(550, 0, 820, 768);
 		setLayout(null);
 
-		
 		lFuncionario = new JLabel("");
 		lFuncionario.setBounds(350, 130, 350, 60);
 		lFuncionario.setFont(new Font("Arial", Font.TRUETYPE_FONT, 30));
 		lFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/id-card-2.png")));
 		lFuncionario.setForeground(new Color(70, 130, 180));
 		add(lFuncionario);
-		
+
 		lFuncionario = new JLabel("Cadastro de Funcionário");
 		lFuncionario.setBounds(200, 200, 350, 60);
 		lFuncionario.setFont(new Font("Arial", Font.TRUETYPE_FONT, 30));
@@ -101,6 +100,7 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 		tConsultaCpf.setBounds(280, 300, 280, 40);
 		tConsultaCpf.setFont(new Font("Arial", Font.PLAIN, 20));
 		tConsultaCpf.setForeground(new Color(92, 92, 92));
+		tConsultaCpf.setDocument(new Tratamento());
 		add(tConsultaCpf);
 
 		bVoltar = new JButton("<");
@@ -159,6 +159,7 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tNome = new JTextField("");
 		tNome.setBounds(100, 160, 250, 40);
+		tNome.setDocument(new Tratamento2());
 		add(tNome);
 
 		lCpf = new JLabel("CPF");
@@ -171,6 +172,8 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tCpf = new JTextField(cpf);
 		tCpf.setBounds(430, 160, 120, 40);
+		tCpf.setEnabled(false);
+		tCpf.setEditable(false);
 		add(tCpf);
 
 		lRg = new JLabel("RG");
@@ -181,12 +184,15 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tRg = new JTextField("");
 		tRg.setBounds(630, 160, 80, 40);
+		tRg.setDocument(new Tratamento());
+
 		add(tRg);
 
 		lCargo = new JLabel("Cargo");
 		lCargo.setBounds(20, 210, 350, 40);
 		lCargo.setFont(new Font("Arial", Font.PLAIN, 20));
 		lCargo.setForeground(new Color(128, 128, 128));
+		tNome.setDocument(new Tratamento2());
 		add(lCargo);
 
 		tCargo = new JTextField("");
@@ -201,6 +207,7 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tValorHora = new JTextField("");
 		tValorHora.setBounds(470, 210, 80, 40);
+		tValorHora.setDocument(new Tratamento());
 		add(tValorHora);
 
 		lFuncionario = new JLabel("Endereço");
@@ -227,6 +234,7 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tNumero = new JTextField("");
 		tNumero.setBounds(340, 360, 90, 40);
+		tNumero.setDocument(new Tratamento());
 		add(tNumero);
 
 		lComplemento = new JLabel("Complemento");
@@ -237,6 +245,7 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tComplemento = new JTextField("");
 		tComplemento.setBounds(460, 360, 250, 40);
+		tComplemento.setDocument(new Tratamento2());
 		add(tComplemento);
 
 		lCep = new JLabel("CEP");
@@ -247,6 +256,7 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tCep = new JTextField("");
 		tCep.setBounds(20, 450, 90, 40);
+		tCep.setDocument(new Tratamento());
 		add(tCep);
 
 		lBairro = new JLabel("Bairro");
@@ -257,6 +267,7 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tBairro = new JTextField("");
 		tBairro.setBounds(140, 450, 170, 40);
+		tBairro.setDocument(new Tratamento2());
 		add(tBairro);
 
 		lCidade = new JLabel("Cidade");
@@ -267,6 +278,7 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tCidade = new JTextField("");
 		tCidade.setBounds(340, 450, 170, 40);
+		tCidade.setDocument(new Tratamento2());
 		add(tCidade);
 
 		lEstado = new JLabel("Estado");
@@ -277,6 +289,7 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tEstado = new JTextField("");
 		tEstado.setBounds(540, 450, 170, 40);
+		tEstado.setDocument(new Tratamento2());
 		add(tEstado);
 
 		lFuncionario = new JLabel("Contato");
@@ -303,6 +316,7 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tTelefoneResidencial = new JTextField("");
 		tTelefoneResidencial.setBounds(340, 600, 170, 40);
+		tTelefoneResidencial.setDocument(new Tratamento());
 		add(tTelefoneResidencial);
 
 		lTelefoneCelular = new JLabel("Celular");
@@ -313,6 +327,7 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		tTelefoneCelular = new JTextField("");
 		tTelefoneCelular.setBounds(540, 600, 170, 40);
+		tTelefoneCelular.setDocument(new Tratamento());
 		add(tTelefoneCelular);
 
 		bCadastrar = new JButton("Enviar");
@@ -337,67 +352,92 @@ public class PanelCadastroFuncionario extends JPanel implements ActionListener {
 
 		if (ae.getSource() == bEnviar) {
 
-			removeAll();
-			PanelResultadoConsulta();
+			String cpfStg = tConsultaCpf.getText();
+			long cpf = Long.parseLong(cpfStg);
+
+			if (GerenciarFuncionarios.existe(cpf) == true) {
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Este CPF já foi cadastrado! \nPor favor, tente outro cpf válido.", ":(",
+						JOptionPane.ERROR_MESSAGE);
+				tConsultaCpf.setText("");
+
+			} else {
+				removeAll();
+				PanelResultadoConsulta();
+			}
 
 		}
 
 		if (ae.getSource() == bCadastrar) {
 
-			String cpfStg = tCpf.getText();
-			long cpf = Long.parseLong(cpfStg);
+			try {
+				String cpfStg = tCpf.getText();
+				long cpf = Long.parseLong(cpfStg);
 
-			String nome = tNome.getText();
+				String nome = tNome.getText();
 
-			String cargo = tCargo.getText();
+				String cargo = tCargo.getText();
 
-			String valhStg = tValorHora.getText();
-			int valorHora = Integer.parseInt(valhStg);
+				String valhStg = tValorHora.getText();
+				int valorHora = Integer.parseInt(valhStg);
 
-			String logradouro = tLogradouro.getText();
+				String logradouro = tLogradouro.getText();
 
-			String numStg = tNumero.getText();
-			int numero = Integer.parseInt(numStg);
+				String numStg = tNumero.getText();
+				int numero = Integer.parseInt(numStg);
 
-			String bairro = tBairro.getText();
+				String bairro = tBairro.getText();
 
-			String cidade = tCidade.getText();
+				String cidade = tCidade.getText();
 
-			String estado = tEstado.getText();
+				String estado = tEstado.getText();
 
-			Pessoa novoFuncionario = new Funcionario(nome, cpf, cargo, valorHora, logradouro, numero, bairro, cidade,
-					estado);
+				Pessoa novoFuncionario = new Funcionario(nome, cpf, cargo, valorHora, logradouro, numero, bairro,
+						cidade, estado);
 
-			String rgStg = tRg.getText();
-			long rg = Long.parseLong(rgStg);
-			novoFuncionario.setRg(rg);
+				String rgStg = tRg.getText();
+				long rg = Long.parseLong(rgStg);
+				novoFuncionario.setRg(rg);
 
-			String cepStg = tCep.getText();
-			long cep = Long.parseLong(cepStg);
-			novoFuncionario.setCep(cep);
+				String cepStg = tCep.getText();
+				long cep = Long.parseLong(cepStg);
+				novoFuncionario.setCep(cep);
 
-			String complemento = tComplemento.getText();
-			novoFuncionario.setComplemento(complemento);
+				String complemento = tComplemento.getText();
+				novoFuncionario.setComplemento(complemento);
 
-			String telefoneResidencialStg = tTelefoneResidencial.getText();
-			long telefoneResidencial = Long.parseLong(telefoneResidencialStg);
-			novoFuncionario.setTelefoneResidencial(telefoneResidencial);
+				String telefoneResidencialStg = tTelefoneResidencial.getText();
+				long telefoneResidencial = Long.parseLong(telefoneResidencialStg);
+				novoFuncionario.setTelefoneResidencial(telefoneResidencial);
 
-			String telefoneCelularStg = tTelefoneCelular.getText();
-			long telefoneCelular = Long.parseLong(telefoneCelularStg);
-			novoFuncionario.setTelefoneCelular(telefoneCelular);
+				String telefoneCelularStg = tTelefoneCelular.getText();
+				long telefoneCelular = Long.parseLong(telefoneCelularStg);
+				novoFuncionario.setTelefoneCelular(telefoneCelular);
 
-			String email = tEmail.getText();
-			novoFuncionario.setEmail(email);
+				String email = tEmail.getText();
+				novoFuncionario.setEmail(email);
 
-			GerenciarFuncionarios.AdicionarFuncionario(novoFuncionario);
+				GerenciarFuncionarios.AdicionarFuncionario(novoFuncionario);
 
-			removeAll();
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame, "O funcionário " + nome + " foi cadastrado com sucesso! ", ":)",
+						JOptionPane.INFORMATION_MESSAGE);
 
-			PanelGerenciamento pGerenciamento = new PanelGerenciamento();
-			setVisible(false);
-			Inicio.panelInicio(pGerenciamento);
-			pGerenciamento.setVisible(true);
+				removeAll();
+
+				PanelGerenciamento pGerenciamento = new PanelGerenciamento();
+				setVisible(false);
+				Inicio.panelInicio(pGerenciamento);
+				pGerenciamento.setVisible(true);
+
+			} catch (Exception e) {
+
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Ocorreu um erro ao tentar cadastrar o funcionário! \nPor favor, verifique todos os dados",
+						":(", JOptionPane.ERROR_MESSAGE);
+			}
 
 		}
 

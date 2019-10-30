@@ -7,7 +7,6 @@ import stocks.*;
 
 import java.awt.event.*;
 
-
 /**
  * PanelGerenciamento
  */
@@ -28,7 +27,7 @@ public class PanelExcluiServico extends JPanel implements ActionListener {
 		setBackground(Color.WHITE);
 		setBounds(550, 0, 820, 768);
 		setLayout(null);
-		
+
 		lServicos = new JLabel("");
 		lServicos.setBounds(350, 130, 350, 60);
 		lServicos.setFont(new Font("Arial", Font.TRUETYPE_FONT, 30));
@@ -53,6 +52,7 @@ public class PanelExcluiServico extends JPanel implements ActionListener {
 		tConsultaCodigo.setBounds(310, 300, 250, 40);
 		tConsultaCodigo.setFont(new Font("Arial", Font.PLAIN, 20));
 		tConsultaCodigo.setForeground(new Color(92, 92, 92));
+		tConsultaCodigo.setDocument(new Tratamento());
 		add(tConsultaCodigo);
 
 		bVoltar = new JButton("<");
@@ -78,36 +78,39 @@ public class PanelExcluiServico extends JPanel implements ActionListener {
 
 	}
 
-
-	void PanelResultadoConsulta() {
-
-		String codStg = tConsultaCodigo.getText();
-		int codigo = Integer.parseInt(codStg);
-
-		GerenciarServicos.excluirServico(codigo);
-
-		lServicos = new JLabel("Resultado: ");
-		lServicos.setBounds(20, 280, 350, 60);
-		lServicos.setFont(new Font("Arial", Font.PLAIN, 20));
-		lServicos.setForeground(new Color(128, 128, 128));
-		add(lServicos);
-
-		bVoltar = new JButton("Voltar");
-		bVoltar.setBounds(400, 600, 180, 60);
-		bVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
-		bVoltar.setForeground(new Color(205, 92, 92));
-		bVoltar.addActionListener(this);
-		add(bVoltar);
-
-		repaint(); 
-
-	}
-
 	public void actionPerformed(ActionEvent ae) {
 
 		if (ae.getSource() == bEnviar) {
-			removeAll();
-			PanelResultadoConsulta();
+			String codStg = tConsultaCodigo.getText();
+			long codigo = Long.parseLong(codStg);
+
+			if (GerenciarServicos.existe(codigo) == false) {
+				Component frame = null;
+				JOptionPane.showMessageDialog(frame,
+						"Nenhum serviço com este código foi encontrado! \nPor favor, tente outro código válido.", ":(",
+						JOptionPane.ERROR_MESSAGE);
+				tConsultaCodigo.setText("");
+
+			} else {
+				try {
+					GerenciarServicos.excluirServico(codigo);
+					Component frame = null;
+					JOptionPane.showMessageDialog(frame, "O seviço foi removido com sucesso! ", ":)",
+							JOptionPane.INFORMATION_MESSAGE);
+
+					removeAll();
+					PanelGerenciamento pGerenciamento = new PanelGerenciamento();
+					setVisible(false);
+					Inicio.panelInicio(pGerenciamento);
+					pGerenciamento.setVisible(true);
+
+				} catch (Exception e) {
+					Component frame = null;
+					JOptionPane.showMessageDialog(frame,
+							"Ocorreu um erro ao tentar remover este serviço! \nPor favor, verifique todos os dados",
+							":(", JOptionPane.ERROR_MESSAGE);
+				}
+			}
 
 		}
 
