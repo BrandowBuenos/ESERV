@@ -9,7 +9,7 @@ import peoples.Pessoa;
  */
 public class ProdutosController {
 
-	private ArrayList<Produto> listaDeProdutos;
+	private static ArrayList<Produto> listaDeProdutos;
 
 	public ProdutosController() {
 		listaDeProdutos = new ArrayList<Produto>();
@@ -27,7 +27,7 @@ public class ProdutosController {
 		}
 		return null;
 	}
-	
+
 	public String get() {
 		String info = "";
 		for (int i = 0; i < listaDeProdutos.size(); i++) {
@@ -55,6 +55,10 @@ public class ProdutosController {
 			}
 		}
 		return false;
+	}
+
+	public static ArrayList<Produto> getListaDeProdutos() {
+		return listaDeProdutos;
 	}
 
 }

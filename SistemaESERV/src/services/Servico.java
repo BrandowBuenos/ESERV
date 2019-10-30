@@ -59,12 +59,14 @@ public class Servico {
 		return listaDeFuncionariosAptos;
 	}
 
+	
+	
 	public void setListaDeFuncionariosAptos(ArrayList<Funcionario> listaDeFuncionariosAptos) {
 		this.listaDeFuncionariosAptos = listaDeFuncionariosAptos;
 	}
 
 	public String toString() {
-		return "- Código:" + this.codigoServico + "- Nome:" + this.nome + "- Descrição:" + this.descricao + "- Preço:"
+		return "- Código: " + this.codigoServico + " - Nome: " + this.nome + " - Descrição: " + this.descricao + " - Preço: "
 				+ this.preco;
 	}
 

@@ -1,4 +1,5 @@
 package interfaces;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -8,196 +9,124 @@ import java.awt.event.*;
  */
 public class PanelPrestacaoConta extends JPanel implements ActionListener {
 
-    private JFrame frame;
-    private JPanel panel;
+	private JLabel lServicosPrestados;
+	private JButton bCadastroServicoPrestado;
+	private JButton bEditarServicoPrestado;
+	private JButton bExcluirServicoPrestado;
+	private JButton bConsultarServicoPrestado;
+	private JButton bVoltar;
 
-    private JLabel lClientes;
-    private JButton bCadastroCliente;
-    private JButton bEditarCliente;
-    private JButton bExcluirCliente;
-    private JButton bConsultarCliente;
+	PanelPrestacaoConta() {
+		setBackground(Color.WHITE);
+		setBounds(550, 0, 820, 768);
+		setLayout(null);
+		
+		bVoltar = new JButton("<");
+		bVoltar.setBounds(20, 20, 40, 40);
+		bVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
+		bVoltar.setForeground(new Color(205, 92, 92));
+		bVoltar.addActionListener(this);
+		add(bVoltar);
 
-    private JLabel lFuncionarios;
-    private JButton bCadastroFuncionario;
-    private JButton bEditarFuncionario;
-    private JButton bExcluirFuncionario;
-    private JButton bConsultarFuncionario;
+		lServicosPrestados = new JLabel("");
+		lServicosPrestados.setBounds(140, 50, 350, 60);
+		lServicosPrestados.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/map.png")));
+		add(lServicosPrestados);
 
-    private JLabel lEstoque;
-    private JButton bCadastroEstoque;
-    private JButton bEditarEstoque;
-    private JButton bExcluirEstoque;
-    private JButton bConsultarEstoque;
+		lServicosPrestados = new JLabel("Serviços prestados");
+		lServicosPrestados.setBounds(90, 100, 350, 60);
+		lServicosPrestados.setFont(new Font("Arial", Font.PLAIN, 30));
+		lServicosPrestados.setForeground(new Color(70, 130, 180));
+		add(lServicosPrestados);
 
-    private JLabel lServicos;
-    private JButton bCadastroServico;
-    private JButton bEditarServico;
-    private JButton bExcluirServico;
-    private JButton bConsultarServico;
+		bCadastroServicoPrestado = new JButton("  Cadastro");
+		bCadastroServicoPrestado.setBounds(0, 170, 330, 30);
+		bCadastroServicoPrestado.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/add-2.png")));
+		bCadastroServicoPrestado.setFont(new Font("Arial", Font.PLAIN, 25));
+		bCadastroServicoPrestado.setForeground(new Color(169, 169, 169));
+		bCadastroServicoPrestado.setBorderPainted(false);
+		bCadastroServicoPrestado.addActionListener(this);
+		add(bCadastroServicoPrestado);
 
-    PanelPrestacaoConta() {
-        lClientes = new JLabel("Clientes");
-        lClientes.setBounds(100, 60, 350, 60);
-        lClientes.setFont(new Font("Arial", Font.PLAIN, 30));
-        lClientes.setForeground(new Color(70, 130, 180));
-        add(lClientes);
+		bConsultarServicoPrestado = new JButton("  Consultar");
+		bConsultarServicoPrestado.setBounds(0, 220, 340, 30);
+		bConsultarServicoPrestado.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/search-2.png")));
+		bConsultarServicoPrestado.setFont(new Font("Arial", Font.PLAIN, 25));
+		bConsultarServicoPrestado.setForeground(new Color(169, 169, 169));
+		bConsultarServicoPrestado.addActionListener(this);
+		bConsultarServicoPrestado.setBorderPainted(false);
+		add(bConsultarServicoPrestado);
 
-        bCadastroCliente = new JButton("Cadastro");
-        // bGerenciamento.setIcon(defaultIcon);
-        bCadastroCliente.setBounds(30, 130, 330, 30);
-        bCadastroCliente.setFont(new Font("Arial", Font.PLAIN, 25));
-        bCadastroCliente.setForeground(new Color(169, 169, 169));
-        bCadastroCliente.setBorderPainted(false);
-        bCadastroCliente.addActionListener(this);
-        add(bCadastroCliente);
+		bEditarServicoPrestado = new JButton("  Editar");
+		bEditarServicoPrestado.setBounds(0, 270, 300, 30);
+		bEditarServicoPrestado.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/edit.png")));
+		bEditarServicoPrestado.setFont(new Font("Arial", Font.PLAIN, 25));
+		bEditarServicoPrestado.setForeground(new Color(169, 169, 169));
+		bEditarServicoPrestado.addActionListener(this);
+		bEditarServicoPrestado.setBorderPainted(false);
+		add(bEditarServicoPrestado);
 
-        bEditarCliente = new JButton("Editar");
-        // bGerenciamento.setIcon(defaultIcon);
-        bEditarCliente.setBounds(30, 180, 300, 30);
-        bEditarCliente.setFont(new Font("Arial", Font.PLAIN, 25));
-        bEditarCliente.setForeground(new Color(169, 169, 169));
-        bEditarCliente.setBorderPainted(false);
-        add(bEditarCliente);
+		bExcluirServicoPrestado = new JButton("  Excluir");
+		bExcluirServicoPrestado.setBounds(0, 320, 310, 30);
+		bExcluirServicoPrestado.setIcon(new javax.swing.ImageIcon(getClass().getResource("icons/garbage.png")));
+		bExcluirServicoPrestado.setFont(new Font("Arial", Font.PLAIN, 25));
+		bExcluirServicoPrestado.setForeground(new Color(169, 169, 169));
+		bExcluirServicoPrestado.addActionListener(this);
+		bExcluirServicoPrestado.setBorderPainted(false);
+		add(bExcluirServicoPrestado);
 
-        bExcluirCliente = new JButton("Excluir");
-        // bGerenciamento.setIcon(defaultIcon);
-        bExcluirCliente.setBounds(30, 230, 310, 30);
-        bExcluirCliente.setFont(new Font("Arial", Font.PLAIN, 25));
-        bExcluirCliente.setForeground(new Color(169, 169, 169));
-        bExcluirCliente.setBorderPainted(false);
-        add(bExcluirCliente);
+		setBounds(550, 00, 820, 768);
+		setLayout(null);
 
-        bConsultarCliente = new JButton("Consultar");
-        // bGerenciamento.setIcon(defaultIcon);
-        bConsultarCliente.setBounds(30, 280, 340, 30);
-        bConsultarCliente.setFont(new Font("Arial", Font.PLAIN, 25));
-        bConsultarCliente.setForeground(new Color(169, 169, 169));
-        bConsultarCliente.setBorderPainted(false);
-        add(bConsultarCliente);
+	}
 
-        lFuncionarios = new JLabel("Funcionários");
-        lFuncionarios.setBounds(420, 60, 300, 60);
-        lFuncionarios.setFont(new Font("Arial", Font.PLAIN, 30));
-        lFuncionarios.setForeground(new Color(70, 130, 180));
-        add(lFuncionarios);
+	public void actionPerformed(ActionEvent ae) {
 
-        bCadastroFuncionario = new JButton("Cadastro");
-        bCadastroFuncionario.setBounds(355, 130, 330, 30);
-        bCadastroFuncionario.setFont(new Font("Arial", Font.PLAIN, 25));
-        bCadastroFuncionario.setForeground(new Color(169, 169, 169));
-        bCadastroFuncionario.setBorderPainted(false);
-        add(bCadastroFuncionario);
+		if (ae.getSource() == bCadastroServicoPrestado) {
 
-        bEditarFuncionario = new JButton("Editar");
-        bEditarFuncionario.setBounds(355, 180, 300, 30);
-        bEditarFuncionario.setFont(new Font("Arial", Font.PLAIN, 25));
-        bEditarFuncionario.setForeground(new Color(169, 169, 169));
-        bEditarFuncionario.setBorderPainted(false);
-        add(bEditarFuncionario);
+			PanelCadastroServicoPrestado pCadastroServicoPrestado = new PanelCadastroServicoPrestado();
+			setVisible(false);
+			Inicio.panelInicio(pCadastroServicoPrestado);
+			pCadastroServicoPrestado.setVisible(true);
+			
+		}
 
-        bExcluirFuncionario = new JButton("Excluir");
-        bExcluirFuncionario.setBounds(355, 230, 310, 30);
-        bExcluirFuncionario.setFont(new Font("Arial", Font.PLAIN, 25));
-        bExcluirFuncionario.setForeground(new Color(169, 169, 169));
-        bExcluirFuncionario.setBorderPainted(false);
-        add(bExcluirFuncionario);
+		if (ae.getSource() == bConsultarServicoPrestado) {
 
-        bConsultarFuncionario = new JButton("Consultar");
-        bConsultarFuncionario.setBounds(355, 280, 340, 30);
-        bConsultarFuncionario.setFont(new Font("Arial", Font.PLAIN, 25));
-        bConsultarFuncionario.setForeground(new Color(169, 169, 169));
-        bConsultarFuncionario.setBorderPainted(false);
-        add(bConsultarFuncionario);
+			PanelConsultaServicosPrestados pConsultaServicosPrestados = new PanelConsultaServicosPrestados();
+			setVisible(false);
+			Inicio.panelInicio(pConsultaServicosPrestados);
+			pConsultaServicosPrestados.setVisible(true);
 
-        lEstoque = new JLabel("Estoque");
-        lEstoque.setBounds(100, 370, 300, 60);
-        lEstoque.setFont(new Font("Arial", Font.PLAIN, 30));
-        lEstoque.setForeground(new Color(70, 130, 180));
-        add(lEstoque);
+		}
 
-        bCadastroEstoque = new JButton("Cadastro");
-        // bGerenciamento.setIcon(defaultIcon);
-        bCadastroEstoque.setBounds(30, 440, 330, 30);
-        bCadastroEstoque.setFont(new Font("Arial", Font.PLAIN, 25));
-        bCadastroEstoque.setForeground(new Color(169, 169, 169));
-        bCadastroEstoque.setBorderPainted(false);
-        add(bCadastroEstoque);
+		if (ae.getSource() == bEditarServicoPrestado) {
 
-        bEditarEstoque = new JButton("Editar");
-        // bGerenciamento.setIcon(defaultIcon);
-        bEditarEstoque.setBounds(30, 490, 300, 30);
-        bEditarEstoque.setFont(new Font("Arial", Font.PLAIN, 25));
-        bEditarEstoque.setForeground(new Color(169, 169, 169));
-        bEditarEstoque.setBorderPainted(false);
-        add(bEditarEstoque);
+			PanelEditaCliente pEditaCliente = new PanelEditaCliente();
+			setVisible(false);
+			Inicio.panelInicio(pEditaCliente);
+			pEditaCliente.setVisible(true);
+		}
 
-        bExcluirEstoque = new JButton("Excluir");
-        // bGerenciamento.setIcon(defaultIcon);
-        bExcluirEstoque.setBounds(30, 540, 310, 30);
-        bExcluirEstoque.setFont(new Font("Arial", Font.PLAIN, 25));
-        bExcluirEstoque.setForeground(new Color(169, 169, 169));
-        bExcluirEstoque.setBorderPainted(false);
-        add(bExcluirEstoque);
+		if (ae.getSource() == bExcluirServicoPrestado) {
 
-        bConsultarEstoque = new JButton("Consultar");
-        // bGerenciamento.setIcon(defaultIcon);
-        bConsultarEstoque.setBounds(30, 590, 340, 30);
-        bConsultarEstoque.setFont(new Font("Arial", Font.PLAIN, 25));
-        bConsultarEstoque.setForeground(new Color(169, 169, 169));
-        bConsultarEstoque.setBorderPainted(false);
-        add(bConsultarEstoque);
+			PanelExcluiCliente pExcluiCliente = new PanelExcluiCliente();
+			setVisible(false);
+			Inicio.panelInicio(pExcluiCliente);
+			pExcluiCliente.setVisible(true);
+		}
+		
+		if (ae.getSource() == bVoltar) {
+			if (ae.getSource() == bVoltar) {
 
-        lServicos = new JLabel("Serviços");
-        lServicos.setBounds(420, 370, 300, 60);
-        lServicos.setFont(new Font("Arial", Font.PLAIN, 30));
-        lServicos.setForeground(new Color(70, 130, 180));
-        add(lServicos);
+				PanelGerenciamento pGerenciamento = new PanelGerenciamento();
+				setVisible(false);
+				Inicio.panelInicio(pGerenciamento);
+				pGerenciamento.setVisible(true);
+			}
 
-        bCadastroServico = new JButton("Cadastro");
-        // bGerenciamento.setIcon(defaultIcon);
-        bCadastroServico.setBounds(355, 440, 330, 30);
-        bCadastroServico.setFont(new Font("Arial", Font.PLAIN, 25));
-        bCadastroServico.setForeground(new Color(169, 169, 169));
-        bCadastroServico.setBorderPainted(false);
-        add(bCadastroServico);
+		}
 
-        bEditarServico = new JButton("Editar");
-        // bGerenciamento.setIcon(defaultIcon);
-        bEditarServico.setBounds(355, 490, 300, 30);
-        bEditarServico.setFont(new Font("Arial", Font.PLAIN, 25));
-        bEditarServico.setForeground(new Color(169, 169, 169));
-        bEditarServico.setBorderPainted(false);
-        add(bEditarServico);
 
-        bExcluirServico = new JButton("Excluir");
-        // bGerenciamento.setIcon(defaultIcon);
-        bExcluirServico.setBounds(355, 540, 310, 30);
-        bExcluirServico.setFont(new Font("Arial", Font.PLAIN, 25));
-        bExcluirServico.setForeground(new Color(169, 169, 169));
-        bExcluirServico.setBorderPainted(false);
-        add(bExcluirServico);
-
-        bConsultarServico = new JButton("Consultar");
-        // bGerenciamento.setIcon(defaultIcon);
-        bConsultarServico.setBounds(355, 590, 340, 30);
-        bConsultarServico.setFont(new Font("Arial", Font.PLAIN, 25));
-        bConsultarServico.setForeground(new Color(169, 169, 169));
-        bConsultarServico.setBorderPainted(false);
-        add(bConsultarServico);
-
-        setBounds(550, 0, 820, 720);
-        setLayout(null);
-
-    }
-
-    public void actionPerformed(ActionEvent ae) {
-
-        if (ae.getSource() == bCadastroCliente) {
-            PanelCadastroCliente pcadastro = new PanelCadastroCliente();
-            panel.setVisible(false); // o que fazer aqui
-
-            frame.getContentPane().add(pcadastro);
-            pcadastro.setVisible(true);
-        }
-    }
+	}
 }

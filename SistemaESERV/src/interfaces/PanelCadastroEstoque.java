@@ -3,7 +3,7 @@ package interfaces;
 import java.awt.*;
 import javax.swing.*;
 
-import stock.Produto;
+import stocks.Produto;
 
 import java.awt.event.*;
 

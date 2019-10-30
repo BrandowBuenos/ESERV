@@ -3,10 +3,10 @@ package interfaces;
 import java.awt.*;
 import javax.swing.*;
 
-import stock.*;
+import stocks.*;
 
 import java.awt.event.*;
-import java.util.Scanner;
+
 
 /**
  * PanelGerenciamento

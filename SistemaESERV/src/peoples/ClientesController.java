@@ -108,4 +108,8 @@ public class ClientesController {
 
 	}
 
+	public static ArrayList<Pessoa> getListaDeClientes() {
+		return listaDeClientes;
+	}
+
 }

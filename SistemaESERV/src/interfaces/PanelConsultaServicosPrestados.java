@@ -5,6 +5,8 @@ import javax.swing.*;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
+import services.ServicoPrestado;
+import services.ServicosPrestadosController;
 import stocks.*;
 
 import java.awt.event.*;
@@ -13,26 +15,25 @@ import java.util.ArrayList;
 /**
  * PanelGerenciamento
  */
-public class PanelConsultaEstoque extends JPanel implements ActionListener {
-
+public class PanelConsultaServicosPrestados extends JPanel implements ActionListener {
 
 	private JLabel lEstoque;
 
 	private JButton bEnviar;
 	private JButton bLimpar;
 
-	ArrayList<Produto> listaDeProdutos = new ArrayList<Produto>();
+	ArrayList<ServicoPrestado> listaDeServicosPrestados = new ArrayList<ServicoPrestado>();
 	private JComboBox<String> jCFuncionarios;
 
 	private JButton bVoltar;
 
-	PanelConsultaEstoque() {
+	PanelConsultaServicosPrestados() {
 
 		setBackground(Color.WHITE);
 		setBounds(550, 0, 820, 768);
 		setLayout(null);
 
-		lEstoque = new JLabel("Consultar Estoque");
+		lEstoque = new JLabel("Consultar Serviços Prestados");
 		lEstoque.setBounds(240, 20, 350, 60);
 		lEstoque.setFont(new Font("Arial", Font.PLAIN, 30));
 		lEstoque.setForeground(new Color(128, 128, 128));
@@ -45,25 +46,11 @@ public class PanelConsultaEstoque extends JPanel implements ActionListener {
 		bVoltar.addActionListener(this);
 		add(bVoltar);
 
-		String[] colunas = { "Nome" };
-
-		String p = GerenciarEstoques.ConsultarProduto();
-
-		Object[][] dados = { { p } };
-
-		JTable tabela = new JTable(dados, colunas);
-		add(tabela);
-
-		JScrollPane barraRolagem = new JScrollPane(tabela);
-		add(barraRolagem);
-
-		barraRolagem.setBounds(40, 200, 650, 200);
-		
 		jCFuncionarios = new javax.swing.JComboBox<String>();
 		jCFuncionarios.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Estoque" }));
-		jCFuncionarios.setBounds(20, 450, 400, 300);
-		for (int i = 0; i < ProdutosController.getListaDeProdutos().size(); i++) {
-			jCFuncionarios.addItem(ProdutosController.getListaDeProdutos().get(i).toString());
+		jCFuncionarios.setBounds(20, 250, 400, 300);
+		for (int i = 0; i < ServicosPrestadosController.getListaDeServicosPrestados().size(); i++) {
+			jCFuncionarios.addItem(ServicosPrestadosController.getListaDeServicosPrestados().get(i).toString());
 		}
 		add(jCFuncionarios);
 

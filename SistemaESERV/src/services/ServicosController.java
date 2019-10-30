@@ -18,7 +18,7 @@ public class ServicosController {
 		s.setListaDeFuncionariosAptos(funcionariosAptos);
 	}
 
-	public Servico get(long cod) {
+	public static Servico get(long cod) {
 		for (int i = 0; i < listaDeServicos.size(); i++) {
 			if (listaDeServicos.get(i).getCodigoServico() == cod) {
 				return listaDeServicos.get(i);
@@ -27,6 +27,16 @@ public class ServicosController {
 		}
 		return null;
 
+	}
+
+	public static Servico get(String name) {
+		for (int i = 0; i < listaDeServicos.size(); i++) {
+			if (listaDeServicos.get(i).getNome().equals(name)) {
+				return listaDeServicos.get(i);
+			}
+
+		}
+		return null;
 	}
 
 	public static Servico getInfo(String name) {

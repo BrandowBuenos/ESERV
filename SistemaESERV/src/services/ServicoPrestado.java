@@ -1,86 +1,110 @@
 package services;
-import java.sql.Date;
 
-/**
- * ServicoPrestado
- */
+import java.util.ArrayList;
+
+import peoples.Cliente;
+import peoples.Funcionario;
+import stocks.Produto;
+import services.Servico;
+
+import java.time.LocalDateTime;
+import java.util.Calendar;
+
 public class ServicoPrestado {
+	private static long nCodigoServico;
+	private final long codigoServicoPrestado;
 
-    private int codigo;
-    private String servico;
-    private String cliente;
-    private String funcionario;
-    private Date data;
-    private String horaInicial;
-    private String horaFinal;
-    private String relacaoProdutosUtilizados;
+	private ArrayList<Produto> listaDeProdutosUtilizados;
 
-    public int getCodigo() {
-        return this.codigo;
-    }
+	private Servico servico;
+	private Cliente cliente;
+	private Funcionario funcionario;
+	private Calendar data;
+	private LocalDateTime horaInicial;
+	private LocalDateTime horaFinal;
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
+	public ServicoPrestado(Servico servico, Cliente cliente, Funcionario funcionario, Calendar data,
+			LocalDateTime horaInicial, LocalDateTime horaFinal) {
 
-    public String getServico() {
-        return this.servico;
-    }
+		this.servico = servico;
+		this.cliente = cliente;
+		this.funcionario = funcionario;
+		this.data = data;
+		this.horaInicial = horaInicial;
+		this.horaFinal = horaFinal;
 
-    public void setServico(String servico) {
-        this.servico = servico;
-    }
+		nCodigoServico++;
+		codigoServicoPrestado = nCodigoServico;
+	}
 
-    public String getCliente() {
-        return this.cliente;
-    }
+	ServicoPrestado(long Codigo) {
+		this.codigoServicoPrestado = Codigo;
+	}
 
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
+	public Servico getServico() {
+		return servico;
+	}
 
-    public String getFuncionario() {
-        return this.funcionario;
-    }
+	public void setServico(Servico servico) {
+		this.servico = servico;
+	}
 
-    public void setFuncionario(String funcionario) {
-        this.funcionario = funcionario;
-    }
+	public Cliente getCliente() {
+		return cliente;
+	}
 
-    public Date getData() {
-        return this.data;
-    }
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
-    public void setData(Date data) {
-        this.data = data;
-    }
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
 
-    public String getHoraInicial() {
-        return this.horaInicial;
-    }
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
 
-    public void setHoraInicial(String horaInicial) {
-        this.horaInicial = horaInicial;
-    }
+	public Calendar getData() {
+		return data;
+	}
 
-    public String getHoraFinal() {
-        return this.horaFinal;
-    }
+	public void setData(Calendar data) {
+		this.data = data;
+	}
 
-    public void setHoraFinal(String horaFinal) {
-        this.horaFinal = horaFinal;
-    }
+	public LocalDateTime gethoraInicial() {
+		return horaInicial;
+	}
 
-    public String getRelacaoProdutosUtilizados() {
-        return this.relacaoProdutosUtilizados;
-    }
+	public void sethoraInicial(LocalDateTime horaInicial) {
+		this.horaInicial = horaInicial;
+	}
 
-    public void setRelacaoProdutosUtilizados(String relacaoProdutosUtilizados) {
-        this.relacaoProdutosUtilizados = relacaoProdutosUtilizados;
-    }
+	public LocalDateTime gethoraFinal() {
+		return horaFinal;
+	}
 
-    public String toString() {
-       return "- Código:" + this.codigo + "- Serviço:" + this.servico + "- Cliente:" + this.cliente + "- Funcionário:" + this.funcionario + "- Data:" + this.data + "- Hora Inicial:" + this.horaInicial + "- Hora Final:" + this.horaFinal + "- Produtos Utilizados:" +this.relacaoProdutosUtilizados;
-    }
+	public void sethoraFinal(LocalDateTime horaFinal) {
+		this.horaFinal = horaFinal;
+	}
+
+	public ArrayList<Produto> getlistaDeProdutosUtilizados() {
+		return listaDeProdutosUtilizados;
+	}
+
+	public void setlistaDeProdutosUtilizados(ArrayList<Produto> listaDeProdutosUtilizados) {
+		this.listaDeProdutosUtilizados = listaDeProdutosUtilizados;
+	}
+
+	public long getCodigoServicoPrestado() {
+		return codigoServicoPrestado;
+	}
+
+	public String toString() {
+		return "- Código: " + this.codigoServicoPrestado + " - Serviço: " + this.servico + " - Cliente: " + this.cliente
+				+ " - Funcionário: " + this.funcionario + " - Produtos utilizados: " + listaDeProdutosUtilizados
+				+ "- Data: " + data + " - Hora Inicial: " + horaInicial + " - Hora Final: " + horaFinal;
+	}
 
 }

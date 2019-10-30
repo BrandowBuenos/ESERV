@@ -3,9 +3,7 @@ package interfaces;
 import java.awt.*;
 import javax.swing.*;
 
-import peoples.Cliente;
-import peoples.Pessoa;
-import stock.*;
+import stocks.*;
 
 import java.awt.event.*;
 
@@ -205,10 +203,10 @@ public class PanelEditaEstoque extends JPanel implements ActionListener {
 		}
 
 		if (ae.getSource() == bEditar) {
-			
+
 			String codStg = tConsultaCodigo.getText();
 			int codigo = Integer.parseInt(codStg);
-			
+
 			Produto produtoEditado = new Produto(codigo);
 
 			String nome = tNome.getText();

@@ -33,11 +33,20 @@ public class PanelGerenciamento extends JPanel implements ActionListener {
 	private JButton bEditarServico;
 	private JButton bExcluirServico;
 
+	private JButton bVoltar;
+
 	PanelGerenciamento() {
 
 		setBackground(Color.WHITE);
 		setBounds(550, 0, 820, 768);
 		setLayout(null);
+
+		bVoltar = new JButton("<");
+		bVoltar.setBounds(20, 20, 40, 40);
+		bVoltar.setFont(new Font("Arial", Font.PLAIN, 20));
+		bVoltar.setForeground(new Color(205, 92, 92));
+		bVoltar.addActionListener(this);
+		add(bVoltar);
 
 		lClientes = new JLabel("");
 		lClientes.setBounds(140, 50, 350, 60);
@@ -363,5 +372,14 @@ public class PanelGerenciamento extends JPanel implements ActionListener {
 			pExcluiServico.setVisible(true);
 		}
 
+		if (ae.getSource() == bVoltar) {
+
+			PanelPrestacaoConta pPrestacaoConta = new PanelPrestacaoConta();
+			setVisible(false);
+			Inicio.panelInicio(pPrestacaoConta);
+			pPrestacaoConta.setVisible(true);
+		}
+
 	}
+
 }
