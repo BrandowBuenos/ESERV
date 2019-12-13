@@ -1,5 +1,7 @@
 # ESERV
 
+![Alt Text](https://user-images.githubusercontent.com/52222495/70837454-7fabc780-1de2-11ea-9573-e5239156e4b0.jpg)
+
 O sistema para prestação de serviço ESERV é um software que permite gerenciar um número variado de empresas prestadoras de serviços. 
 
 Dentre as funcionalidades do sistema estão: 
